@@ -6,6 +6,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="53" />
             <RowDefinition Height="53" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="168*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -15,9 +16,9 @@
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <Label Content="Nazwa: " HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
-            <ComboBox x:Name="dialogRecipientName" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" MinWidth="128" MinHeight="24" Width="180" />
+            <TextBox x:Name="dialogRecipientName"  Height="24" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Center" />
             <Label Content="Numer konta bankowego: " Height="23" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Width="350" Grid.Column="1" Margin="5,0,0,0" />
-            <ComboBox x:Name="dialogRecipientAccount" Height="24" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" Width="368" Grid.Column="1" />
+            <TextBox x:Name="dialogRecipientAccount" Height="24" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" Width="368" Grid.Column="1" VerticalContentAlignment="Center" />            
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -27,18 +28,27 @@
                 <ColumnDefinition Width="259*" />
             </Grid.ColumnDefinitions>
             <Label Content="Ulica: " HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" Width="180" Margin="5,0,0,0"/>
-            <ComboBox x:Name="dialogRecipientStreet" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" />
+            <ComboBox x:Name="dialogRecipientStreet" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" IsEditable="True">
+               
+            </ComboBox>
             <Label Content="Nr: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="1" Margin="5,0,0,28" Grid.ColumnSpan="2" />
-            <ComboBox x:Name="dialogRecipientStreetNr" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="37" Grid.Column="1" />
+            <ComboBox x:Name="dialogRecipientStreetNr" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="37" Grid.Column="1" >
+                <ComboBoxItem TextSearch.Text="Inne"/>
+            </ComboBox>
             <Label Content="Kod pocztowy: " HorizontalAlignment="Left" Name="label5" VerticalAlignment="Top" MinWidth="78" Grid.Column="2" Margin="5,0,0,0"/>
-            <ComboBox x:Name="dialogRecipientPostCode" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="78" Grid.Column="2" />
+            <ComboBox x:Name="dialogRecipientPostCode" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="78" Grid.Column="2" >
+                <ComboBoxItem TextSearch.Text="Inne"/>
+            </ComboBox>
             <Label Content="Miasto: " HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" MinWidth="180" Grid.Column="3" Margin="5,0,0,0"/>
-            <ComboBox x:Name="dialogRecipientCity" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Grid.Column="3" />
+            <ComboBox x:Name="dialogRecipientCity" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="243" Grid.Column="3" >
+                <ComboBoxItem TextSearch.Text="Inne"/>
+            </ComboBox>
         </Grid>
         <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+            <Button x:Name="dialogRecipientSave"  Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="404,6,0,0" VerticalAlignment="Top" Width="75" Click="dialogRecipientSave_Click" />
+            <Button x:Name="dialogRecipientCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="485,6,0,0" VerticalAlignment="Top" Width="75" />
+        </Grid>
+        <Grid Grid.Row="3">
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewRecipient" VerticalAlignment="Stretch" Margin="5,5,5,5" />
         </Grid>
     </Grid>
