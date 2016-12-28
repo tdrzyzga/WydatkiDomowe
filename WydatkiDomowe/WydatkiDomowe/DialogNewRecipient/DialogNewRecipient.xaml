@@ -45,7 +45,7 @@
             </ComboBox>
         </Grid>
         <Grid Grid.Row="2">
-            <Button x:Name="dialogRecipientSave"  Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="404,6,0,0" VerticalAlignment="Top" Width="75" Click="dialogRecipientSave_Click" />
+            <Button x:Name="dialogRecipientSave"  Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="404,6,0,0" VerticalAlignment="Top" Width="75" />
             <Button x:Name="dialogRecipientCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="485,6,0,0" VerticalAlignment="Top" Width="75" />
         </Grid>
         <Grid Grid.Row="3">
