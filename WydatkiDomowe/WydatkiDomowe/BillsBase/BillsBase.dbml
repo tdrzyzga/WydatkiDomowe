@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HouseholdExpenses" Class="BillsBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ASUSTEODOR\SQLEXPRESS;Initial Catalog=HouseholdExpenses;Integrated Security=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="Expenses.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Account" Member="Account1" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+      <Association Name="Account_Recipient" Member="Recipients" ThisKey="AccountID" OtherKey="AccountID" Type="Recipient" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.Address" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="AddressID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostCodeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StreetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Number" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Association Name="Address_Recipient" Member="Recipients" ThisKey="AddressID" OtherKey="AddressID" Type="Recipient" />
+      <Association Name="City_Address" Member="City" ThisKey="CityID" OtherKey="CityID" Type="City" IsForeignKey="true" />
+      <Association Name="PostCode_Address" Member="PostCode" ThisKey="PostCodeID" OtherKey="PostCodeID" Type="PostCode" IsForeignKey="true" />
+      <Association Name="Street_Address" Member="Street" ThisKey="StreetID" OtherKey="StreetID" Type="Street" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.BillName" Member="BillNames">
+    <Type Name="BillName">
+      <Column Name="BillNameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="RequiredDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="BillName_Bill" Member="Bills" ThisKey="BillNameID" OtherKey="BillNameID" Type="Bill" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.Bills" Member="Bills">
+    <Type Name="Bill">
+      <Column Name="BillsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BillNameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RecipientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BillName_Bill" Member="BillName" ThisKey="BillNameID" OtherKey="BillNameID" Type="BillName" IsForeignKey="true" />
+      <Association Name="Recipient_Bill" Member="Recipient" ThisKey="RecipientID" OtherKey="RecipientID" Type="Recipient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="CityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="City_Address" Member="Addresses" ThisKey="CityID" OtherKey="CityID" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.PostCode" Member="PostCodes">
+    <Type Name="PostCode">
+      <Column Name="PostCodeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostCode" Member="PostCode1" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Association Name="PostCode_Address" Member="Addresses" ThisKey="PostCodeID" OtherKey="PostCodeID" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.Recipient" Member="Recipients">
+    <Type Name="Recipient">
+      <Column Name="RecipientID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccountID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Recipient_Bill" Member="Bills" ThisKey="RecipientID" OtherKey="RecipientID" Type="Bill" />
+      <Association Name="Account_Recipient" Member="Account" ThisKey="AccountID" OtherKey="AccountID" Type="Account" IsForeignKey="true" />
+      <Association Name="Address_Recipient" Member="Address" ThisKey="AddressID" OtherKey="AddressID" Type="Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.Street" Member="Streets">
+    <Type Name="Street">
+      <Column Name="StreetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="Street_Address" Member="Addresses" ThisKey="StreetID" OtherKey="StreetID" Type="Address" />
+    </Type>
+  </Table>
+</Database>
