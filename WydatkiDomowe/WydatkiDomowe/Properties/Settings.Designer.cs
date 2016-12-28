@@ -33,5 +33,16 @@ namespace WydatkiDomowe.Properties {
                 return ((string)(this["HouseholdExpensesConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ASUSTEODOR\\SQLEXPRESS;Initial Catalog=HouseholdExpenses;Integrated Se" +
+            "curity=True")]
+        public string HouseholdExpensesConnectionString1 {
+            get {
+                return ((string)(this["HouseholdExpensesConnectionString1"]));
+            }
+        }
     }
 }
