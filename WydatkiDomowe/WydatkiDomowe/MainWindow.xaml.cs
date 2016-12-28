@@ -19,14 +19,16 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class MainWindow : Window
     {
+        BillsBaseDataContext HomeBase { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            HomeBase = new BillsBaseDataContext();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            DialogNewRecipient newRecipient = new DialogNewRecipient();
+            DialogNewRecipient newRecipient = new DialogNewRecipient(HomeBase);
             newRecipient.ShowDialog();
         }
 

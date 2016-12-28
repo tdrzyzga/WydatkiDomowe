@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WydatkiDomowe.BillsBase
+namespace WydatkiDomowe
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
