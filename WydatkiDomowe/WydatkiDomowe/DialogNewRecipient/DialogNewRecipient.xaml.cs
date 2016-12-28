@@ -22,15 +22,17 @@ namespace WydatkiDomowe
         private CityTable city;
         private StreetTable street;
         private PostCodeTable postCode;
+        private BillsBaseDataContext homeBase;
 
 
-        public DialogNewRecipient(BillsBaseDataContext homeBase)
+        public DialogNewRecipient(BillsBaseDataContext db)
         {
             InitializeComponent();
-            LoadDate(homeBase);
+            homeBase = db;
+            LoadDate();
         }
 
-        private void LoadDate(BillsBaseDataContext homeBase)
+        private void LoadDate()
         {
             city = new CityTable(homeBase);
             dialogRecipientCity.ItemsSource = city.CityTab;
@@ -40,6 +42,14 @@ namespace WydatkiDomowe
 
             postCode = new PostCodeTable(homeBase);
             dialogRecipientPostCode.ItemsSource = postCode.PostCodeTab;
+        }
+
+        private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
+        {
+            Street stret = new Street();
+            stret.Name = dialogRecipientStreet.Text;
+            homeBase.Streets.InsertOnSubmit(stret);
+            homeBase.SubmitChanges();
         }
     }
 }
