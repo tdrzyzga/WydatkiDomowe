@@ -42,12 +42,10 @@ namespace WydatkiDomowe
         }
 
         private void AddRecipient()
-        {
-            Account account = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text);
-
+        {    
             Recipient newRecipient = new Recipient();
             newRecipient.Name = dialogRecipientName.Text;
-            newRecipient.AccountID = account.AccountID;
+            newRecipient.AccountID = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text).AccountID;
             newRecipient.PostCodeID = (int)dialogRecipientPostCode.SelectedValue;
             newRecipient.CityID = (int)dialogRecipientCity.SelectedValue;
             newRecipient.StreetID = (int)dialogRecipientStreet.SelectedValue;
