@@ -28,7 +28,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Label Content="Ulica: " HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" Height="26"/>
-            <ComboBox x:Name="dialogRecipientStreet"  DisplayMemberPath="Name" SelectedValuePath="ID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24">
+            <ComboBox x:Name="dialogRecipientStreet"  DisplayMemberPath="Name" SelectedValuePath="StreetID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24">
 
             </ComboBox>
             <Label Content="Nr: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="1" Margin="5,0,0,28" Grid.ColumnSpan="2" Width="42" />
@@ -36,9 +36,9 @@
 
             </TextBox>
             <Label Content="Kod pocztowy: " HorizontalAlignment="Left" Name="label5" VerticalAlignment="Top" MinWidth="78" Grid.Column="2" Margin="5,0,0,0" Height="26" Width="113" Grid.ColumnSpan="2"/>
-            <ComboBox x:Name="dialogRecipientPostCode"  DisplayMemberPath="Name" SelectedValuePath="ID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="108" Grid.Column="2" Height="24" />
+            <ComboBox x:Name="dialogRecipientPostCode"  DisplayMemberPath="Name" SelectedValuePath="PostCodeID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" VerticalAlignment="Top" Width="108" Grid.Column="2" Height="24" />
             <Label Content="Miasto: " HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" MinWidth="180" Grid.Column="3" Margin="5,0,0,0" Height="26" Width="180"/>
-            <ComboBox x:Name="dialogRecipientCity" DisplayMemberPath="Name" SelectedValuePath="ID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="219" Grid.Column="3" Height="24" >
+            <ComboBox x:Name="dialogRecipientCity" DisplayMemberPath="Name" SelectedValuePath="CityID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="219" Grid.Column="3" Height="24" >
 
             </ComboBox>
         </Grid>

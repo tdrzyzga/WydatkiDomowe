@@ -19,9 +19,9 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class DialogNewRecipient : Window
     {
-        private CityTable city;
-        private StreetTable street;
-        private PostCodeTable postCode;
+        private CityTable cityTab;
+        private StreetTable streetTab;
+        private PostCodeTable postCodeTab;
         private BillsBaseDataContext homeBase;
 
 
@@ -34,21 +34,32 @@ namespace WydatkiDomowe
 
         private void LoadDate()
         {
-            city = new CityTable(homeBase);
-            dialogRecipientCity.ItemsSource = city.CityTab;
+            cityTab = new CityTable(homeBase);
+            dialogRecipientCity.ItemsSource = cityTab.CityTab;
 
-            street = new StreetTable(homeBase);
-            dialogRecipientStreet.ItemsSource = street.StreetTab;
+            streetTab = new StreetTable(homeBase);
+            dialogRecipientStreet.ItemsSource = streetTab.StreetTab;
 
-            postCode = new PostCodeTable(homeBase);
-            dialogRecipientPostCode.ItemsSource = postCode.PostCodeTab;
+            postCodeTab = new PostCodeTable(homeBase);
+            dialogRecipientPostCode.ItemsSource = postCodeTab.PostCodeTab;
         }
 
         private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
-        {
-            Street stret = new Street();
-            stret.Name = dialogRecipientStreet.Text;
-            homeBase.Streets.InsertOnSubmit(stret);
+        {           
+
+            Account newAccount = new Account();
+            newAccount.Name = dialogRecipientAccount.Text;
+
+            Recipient newRecipient = new Recipient();
+            newRecipient.Name = dialogRecipientName.Text;
+            newRecipient.PostCodeID = (int)dialogRecipientPostCode.SelectedValue;
+            newRecipient.CityID = (int)dialogRecipientCity.SelectedValue;
+            newRecipient.StreetID = (int)dialogRecipientStreet.SelectedValue;
+            newRecipient.BuildingNR = dialogRecipientBuildingNr.Text;
+
+            homeBase.Accounts.InsertOnSubmit(newAccount);
+            homeBase.Recipients.InsertOnSubmit(newRecipient);
+
             homeBase.SubmitChanges();
         }
     }
