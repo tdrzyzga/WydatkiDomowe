@@ -19,12 +19,8 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class DialogNewRecipient : Window
     {
-        private CityTable cityTab;
-        private StreetTable streetTab;
-        private PostCodeTable postCodeTab;
         private BillsBaseDataContext homeBase;
-
-
+        
         public DialogNewRecipient(BillsBaseDataContext db)
         {
             InitializeComponent();
@@ -34,32 +30,39 @@ namespace WydatkiDomowe
 
         private void LoadDate()
         {
-            cityTab = new CityTable(homeBase);
-            dialogRecipientCity.ItemsSource = cityTab.CityTab;
-
-            streetTab = new StreetTable(homeBase);
-            dialogRecipientStreet.ItemsSource = streetTab.StreetTab;
-
-            postCodeTab = new PostCodeTable(homeBase);
-            dialogRecipientPostCode.ItemsSource = postCodeTab.PostCodeTab;
+            dialogRecipientCity.ItemsSource = homeBase.GetTable<City>();
+            dialogRecipientStreet.ItemsSource = homeBase.GetTable<Street>();
+            dialogRecipientPostCode.ItemsSource = homeBase.GetTable<PostCode>();
         }
 
-        private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
-        {           
+        private void DialogRecipientSave_Click(object sender, RoutedEventArgs e)
+        {
+            AddAccount();    
+            AddRecipient();
+        }
 
-            Account newAccount = new Account();
-            newAccount.Name = dialogRecipientAccount.Text;
+        private void AddRecipient()
+        {
+            Account account = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text);
 
             Recipient newRecipient = new Recipient();
             newRecipient.Name = dialogRecipientName.Text;
+            newRecipient.AccountID = account.AccountID;
             newRecipient.PostCodeID = (int)dialogRecipientPostCode.SelectedValue;
             newRecipient.CityID = (int)dialogRecipientCity.SelectedValue;
             newRecipient.StreetID = (int)dialogRecipientStreet.SelectedValue;
             newRecipient.BuildingNR = dialogRecipientBuildingNr.Text;
 
-            homeBase.Accounts.InsertOnSubmit(newAccount);
             homeBase.Recipients.InsertOnSubmit(newRecipient);
+            homeBase.SubmitChanges();
+        }
 
+        private void AddAccount()
+        {
+            Account newAccount = new Account();
+            newAccount.Name = dialogRecipientAccount.Text;
+
+            homeBase.Accounts.InsertOnSubmit(newAccount);
             homeBase.SubmitChanges();
         }
     }

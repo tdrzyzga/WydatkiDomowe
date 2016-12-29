@@ -64,9 +64,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillsBase.dbml</DependentUpon>
     </Compile>
-    <Compile Include="CityTable\CityTable.cs" />
-    <Compile Include="PostCodeTable\PostCodeTable.cs" />
-    <Compile Include="StreetTable\StreetTable.cs" />
     <Page Include="DialogNewRecipient\DialogNewRecipient.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
