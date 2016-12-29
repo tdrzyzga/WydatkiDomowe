@@ -54,7 +54,7 @@ namespace WydatkiDomowe
     #endregion
 		
 		public BillsBaseDataContext() : 
-				base(global::WydatkiDomowe.Properties.Settings.Default.HouseholdExpensesConnectionString2, mappingSource)
+				base(global::WydatkiDomowe.Properties.Settings.Default.HouseholdExpensesConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
