@@ -44,5 +44,17 @@ namespace WydatkiDomowe.Properties {
                 return ((string)(this["HouseholdExpensesConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=\"C:\\Program Files\\Microsoft SQL Server\\" +
+            "MSSQL10.SQLEXPRESS\\MSSQL\\DATA\\HouseholdExpenses.mdf\";Integrated Security=True;Co" +
+            "nnect Timeout=30;User Instance=True")]
+        public string HouseholdExpensesConnectionString2 {
+            get {
+                return ((string)(this["HouseholdExpensesConnectionString2"]));
+            }
+        }
     }
 }
