@@ -45,14 +45,71 @@ namespace WydatkiDomowe
         {    
             Recipient newRecipient = new Recipient();
             newRecipient.Name = dialogRecipientName.Text;
-            newRecipient.AccountID = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text).AccountID;
-            newRecipient.PostCodeID = (int)dialogRecipientPostCode.SelectedValue;
-            newRecipient.CityID = (int)dialogRecipientCity.SelectedValue;
-            newRecipient.StreetID = (int)dialogRecipientStreet.SelectedValue;
+            newRecipient.AccountID = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text).AccountID;            
+            newRecipient.PostCodeID = AddPostCode();     
+            newRecipient.CityID = AddCity();
+            newRecipient.StreetID = AddStreet();
             newRecipient.BuildingNR = dialogRecipientBuildingNr.Text;
 
             homeBase.Recipients.InsertOnSubmit(newRecipient);
             homeBase.SubmitChanges();
+        }
+
+        private int AddStreet()
+        {
+            int streetID;
+
+            if (dialogRecipientCity.SelectedValue == null)
+            {
+                Street newStreet = new Street();
+                newStreet.Name = dialogRecipientStreet.Text;
+                homeBase.Streets.InsertOnSubmit(newStreet);
+                homeBase.SubmitChanges();
+                streetID = homeBase.Streets.Single(i => i.Name == dialogRecipientStreet.Text).StreetID;
+            }
+
+            else
+                streetID = (int)dialogRecipientStreet.SelectedValue;
+
+            return streetID;
+        }
+
+        private int AddPostCode()
+        {
+            int postCodeID;
+
+            if (dialogRecipientPostCode.SelectedValue == null)
+            {
+                PostCode newPostCode = new PostCode();
+                newPostCode.Name = dialogRecipientPostCode.Text;
+                homeBase.PostCodes.InsertOnSubmit(newPostCode);
+                homeBase.SubmitChanges();
+                postCodeID = homeBase.PostCodes.Single(i => i.Name == dialogRecipientPostCode.Text).PostCodeID;
+            }
+
+            else
+                postCodeID = (int)dialogRecipientPostCode.SelectedValue;
+
+            return postCodeID;
+        }
+
+        private int AddCity()
+        {
+            int cityID;
+
+            if (dialogRecipientCity.SelectedValue == null)
+            {
+                City newCity = new City();
+                newCity.Name = dialogRecipientCity.Text;
+                homeBase.Cities.InsertOnSubmit(newCity);
+                homeBase.SubmitChanges();
+                cityID = homeBase.Cities.Single(i => i.Name == dialogRecipientCity.Text).CityID;
+            }
+
+            else
+                cityID = (int)dialogRecipientCity.SelectedValue;
+
+            return cityID;
         }
 
         private void AddAccount()
