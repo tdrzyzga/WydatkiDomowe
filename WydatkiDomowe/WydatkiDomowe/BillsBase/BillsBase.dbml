@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HouseholdExpenses" Class="BillsBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="Expenses.Account" Member="Accounts">
-    <Type Name="Account">
-      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
-      <Association Name="Account_Recipient" Member="Recipients" ThisKey="AccountID" OtherKey="AccountID" Type="Recipient" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="Expenses.BillName" Member="BillNames">
     <Type Name="BillName">
       <Column Name="BillNameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -43,14 +36,13 @@
   <Table Name="Expenses.Recipient" Member="Recipients">
     <Type Name="Recipient">
       <Column Name="RecipientID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
       <Column Name="PostCodeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StreetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="BuildingNR" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Account" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
       <Association Name="Recipient_Bill" Member="Bills" ThisKey="RecipientID" OtherKey="RecipientID" Type="Bill" />
-      <Association Name="Account_Recipient" Member="Account" ThisKey="AccountID" OtherKey="AccountID" Type="Account" IsForeignKey="true" />
       <Association Name="City_Recipient" Member="City" ThisKey="CityID" OtherKey="CityID" Type="City" IsForeignKey="true" />
       <Association Name="PostCode_Recipient" Member="PostCode" ThisKey="PostCodeID" OtherKey="PostCodeID" Type="PostCode" IsForeignKey="true" />
       <Association Name="Street_Recipient" Member="Street" ThisKey="StreetID" OtherKey="StreetID" Type="Street" IsForeignKey="true" />
@@ -61,6 +53,16 @@
       <Column Name="StreetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Association Name="Street_Recipient" Member="Recipients" ThisKey="StreetID" OtherKey="StreetID" Type="Recipient" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.RecipientView" Member="RecipientViews">
+    <Type Name="RecipientView">
+      <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Account" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Street" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="BuildingNR" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="PostCode" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

@@ -30,6 +30,7 @@ namespace WydatkiDomowe
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(HomeBase);
             newRecipient.ShowDialog();
+            newRecipient.Close();
         }
 
     }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace WydatkiDomowe
 {
@@ -20,12 +21,29 @@ namespace WydatkiDomowe
     public partial class DialogNewRecipient : Window
     {
         private BillsBaseDataContext homeBase;
+        private ObservableCollection<RecipientView> collectionRecipient;
         
         public DialogNewRecipient(BillsBaseDataContext db)
         {
             InitializeComponent();
             homeBase = db;
             LoadDate();
+            LoadListView();
+        }
+
+        private void LoadListView()
+        {
+            collectionRecipient = new ObservableCollection<RecipientView>();
+            foreach (var i in homeBase.GetTable<RecipientView>())
+                collectionRecipient.Add(i);
+            listViewRecipient.ItemsSource = collectionRecipient;
+        }
+
+        private void RefreshListView()
+        {
+            collectionRecipient.Clear();
+            foreach (var i in homeBase.GetTable<RecipientView>())
+                collectionRecipient.Add(i);
         }
 
         private void LoadDate()
@@ -33,19 +51,20 @@ namespace WydatkiDomowe
             dialogRecipientCity.ItemsSource = homeBase.GetTable<City>();
             dialogRecipientStreet.ItemsSource = homeBase.GetTable<Street>();
             dialogRecipientPostCode.ItemsSource = homeBase.GetTable<PostCode>();
+
         }
 
         private void DialogRecipientSave_Click(object sender, RoutedEventArgs e)
-        {
-            AddAccount();    
+        {  
             AddRecipient();
+            RefreshListView();
         }
 
         private void AddRecipient()
         {    
             Recipient newRecipient = new Recipient();
             newRecipient.Name = dialogRecipientName.Text;
-            newRecipient.AccountID = homeBase.Accounts.Single(i => i.Name == dialogRecipientAccount.Text).AccountID;            
+            newRecipient.Account = dialogRecipientAccount.Text;            
             newRecipient.PostCodeID = AddPostCode();     
             newRecipient.CityID = AddCity();
             newRecipient.StreetID = AddStreet();
@@ -59,7 +78,7 @@ namespace WydatkiDomowe
         {
             int streetID;
 
-            if (dialogRecipientCity.SelectedValue == null)
+            if (dialogRecipientStreet.SelectedValue == null)
             {
                 Street newStreet = new Street();
                 newStreet.Name = dialogRecipientStreet.Text;
@@ -67,10 +86,8 @@ namespace WydatkiDomowe
                 homeBase.SubmitChanges();
                 streetID = homeBase.Streets.Single(i => i.Name == dialogRecipientStreet.Text).StreetID;
             }
-
             else
                 streetID = (int)dialogRecipientStreet.SelectedValue;
-
             return streetID;
         }
 
@@ -86,7 +103,6 @@ namespace WydatkiDomowe
                 homeBase.SubmitChanges();
                 postCodeID = homeBase.PostCodes.Single(i => i.Name == dialogRecipientPostCode.Text).PostCodeID;
             }
-
             else
                 postCodeID = (int)dialogRecipientPostCode.SelectedValue;
 
@@ -112,13 +128,9 @@ namespace WydatkiDomowe
             return cityID;
         }
 
-        private void AddAccount()
+        private void DialogRecipientCancel_Click(object sender, RoutedEventArgs e)
         {
-            Account newAccount = new Account();
-            newAccount.Name = dialogRecipientAccount.Text;
-
-            homeBase.Accounts.InsertOnSubmit(newAccount);
-            homeBase.SubmitChanges();
+            this.Hide();
         }
     }
 }
