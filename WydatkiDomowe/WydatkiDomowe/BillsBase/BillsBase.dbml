@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HouseholdExpenses" Class="BillsBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="Expenses.BillName" Member="BillNames">
     <Type Name="BillName">
       <Column Name="BillNameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
