@@ -1,9 +1,45 @@
 ﻿<Window x:Class="WydatkiDomowe.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Content="ButtonNewRecipient" Height="23" HorizontalAlignment="Left" Margin="159,154,0,0" Name="button1" VerticalAlignment="Top" Width="115" Click="button1_Click" />
-        <Button Content="ButtonNewBillName" Height="23" HorizontalAlignment="Left" Margin="306,166,0,0" Name="button2" VerticalAlignment="Top" Width="75" Click="button2_Click" />
+                Title="Wydatki Domowe" MinWidth="580" MinHeight="300" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="414" Width="819" Padding="0,0,0,0" WindowStartupLocation="CenterScreen" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}">
+    <Grid Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="53" />
+            <RowDefinition Height="53" />
+            <RowDefinition Height="168*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Menu HorizontalAlignment="Stretch" Name="menuAdd" VerticalAlignment="Stretch" Background="GhostWhite">
+                <MenuItem Header="Dodaj">
+                    <MenuItem Header="Nowy odbiorca" ToolTip="Dodaj nowego odbiorcę" Click="NewRecipient_Click" />
+                    <MenuItem Header="Nowy rachunek" ToolTip="Dodaj nowegy rachunek" Click="NewBillName_Click" />
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Nazwa: " HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
+            <TextBox x:Name="dialogBillName" MaxLength="15"  Height="24" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Center" />
+            <Label Content="Termin wpłaty do: " Height="23" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Width="111" Grid.Column="1" Margin="5,0,0,0" />
+            <DatePicker x:Name="dialogBillNameDate" Grid.Column="1" Height="24" HorizontalAlignment="Left" Margin="5,21,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="" />
+            <Button x:Name="dialogBillNameSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="5,20,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+            <Button x:Name="dialogBillNameCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="86,20,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" />
+        </Grid>
+        <Grid Grid.Row="3">
+            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBillName" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ListView.View>
+                    <GridView ColumnHeaderStringFormat="{Binding StringFormat=\{0:d\}}">
+                        <GridViewColumn Header="Nazwa" Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Termin wpłaty do" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat=\{0:d\}}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

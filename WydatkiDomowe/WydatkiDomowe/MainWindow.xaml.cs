@@ -26,14 +26,14 @@ namespace WydatkiDomowe
             HomeBase = new BillsBaseDataContext();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void NewRecipient_Click(object sender, RoutedEventArgs e)
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(HomeBase);
             newRecipient.ShowDialog();
             newRecipient.Close();
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void NewBillName_Click(object sender, RoutedEventArgs e)
         {
             DialogNewBillName newBillName = new DialogNewBillName(HomeBase);
             newBillName.ShowDialog();
