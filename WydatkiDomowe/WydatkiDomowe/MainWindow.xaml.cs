@@ -33,5 +33,12 @@ namespace WydatkiDomowe
             newRecipient.Close();
         }
 
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            DialogNewBillName newBillName = new DialogNewBillName(HomeBase);
+            newBillName.ShowDialog();
+            newBillName.Close();
+        }
+
     }
 }
