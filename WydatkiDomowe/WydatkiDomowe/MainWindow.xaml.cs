@@ -19,23 +19,25 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class MainWindow : Window
     {
-        BillsBaseDataContext HomeBase { get; set; }
+        private BillsBaseDataContext dateBase { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            HomeBase = new BillsBaseDataContext();
+            dateBase = new BillsBaseDataContext();
+            mainBillName.ItemsSource = dateBase.GetTable<BillName>();
+            mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
         }
 
         private void NewRecipient_Click(object sender, RoutedEventArgs e)
         {
-            DialogNewRecipient newRecipient = new DialogNewRecipient(HomeBase);
+            DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
             newRecipient.Close();
         }
 
         private void NewBillName_Click(object sender, RoutedEventArgs e)
         {
-            DialogNewBillName newBillName = new DialogNewBillName(HomeBase);
+            DialogNewBillName newBillName = new DialogNewBillName(dateBase);
             newBillName.ShowDialog();
             newBillName.Close();
         }
