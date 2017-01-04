@@ -80,16 +80,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CollectionListView\CollectionListView.cs" />
     <Compile Include="DialogNewBillName\DialogNewBillName.xaml.cs">
       <DependentUpon>DialogNewBillName.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogNewRecipient\DialogNewRecipient.xaml.cs" />
+    <Compile Include="INameInterface\INameInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewRecipient\NewRecipient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -135,6 +138,7 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

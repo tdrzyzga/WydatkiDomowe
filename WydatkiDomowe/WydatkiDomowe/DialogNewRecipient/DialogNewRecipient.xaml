@@ -39,7 +39,7 @@
 
             </ComboBox>
             <Label Content="Miasto: " HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" MinWidth="180" Grid.Column="3" Margin="5,0,0,0" Height="26" Width="180"/>
-            <ComboBox x:Name="dialogRecipientCity" DisplayMemberPath="Name" SelectedValuePath="CityID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,5" MinHeight="24" MinWidth="216" VerticalAlignment="Top" Width="216" Grid.Column="3" Height="24" >
+            <ComboBox x:Name="dialogRecipientCity" DisplayMemberPath="Name" SelectedValuePath="CityID" IsEditable="True" HorizontalAlignment="Left" Margin="5,21,0,5" MinHeight="24" MinWidth="216" VerticalAlignment="Top" Width="216" Grid.Column="3" Height="24">
 
             </ComboBox>
         </Grid>
@@ -48,7 +48,7 @@
             <Button x:Name="dialogRecipientCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="485,6,0,5" VerticalAlignment="Top" Width="75" Click="DialogRecipientCancel_Click" />
         </Grid>
         <Grid Grid.Row="3">
-            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewRecipient" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewRecipient" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nazwa" Width="50" DisplayMemberBinding="{Binding Name}" />

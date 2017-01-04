@@ -20,28 +20,25 @@ namespace WydatkiDomowe
     public partial class DialogNewBillName : Window
     {
         private BillsBaseDataContext homeBase;
-        private ObservableCollection<BillName> collectionBillName;
+        private CollectionListView<BillName> collectionListView;
 
         public DialogNewBillName(BillsBaseDataContext db)
         {
             InitializeComponent();
             homeBase = db;
+            collectionListView = new CollectionListView<BillName>(db);
             LoadListView();
         }
 
         private void LoadListView()
         {
-            collectionBillName = new ObservableCollection<BillName>();
-            foreach (var i in homeBase.GetTable<BillName>())
-                collectionBillName.Add(i);
-            listViewBillName.ItemsSource = collectionBillName;
+            collectionListView.LoadCollection();
+            listViewBillName.ItemsSource = collectionListView.Collection;
         }
 
         private void RefreshListView()
         {
-            collectionBillName.Clear();
-            foreach (var i in homeBase.GetTable<BillName>())
-                collectionBillName.Add(i);
+            collectionListView.RefreshCollection();
         }
 
         private void DialogRecipientCancel_Click(object sender, RoutedEventArgs e)
