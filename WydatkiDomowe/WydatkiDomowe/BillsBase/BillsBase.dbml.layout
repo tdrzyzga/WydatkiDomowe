@@ -9,7 +9,7 @@
       </nestedChildShapes>
     </classShape>
     <classShape Id="a3f3c5cc-914f-4686-a559-77ae05de8c41" absoluteBounds="6.25, 1.125, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/BillsBaseDataContext/Bill" />
+      <DataClassMoniker Name="/BillsBaseDataContext/Bills" />
       <nestedChildShapes>
         <elementListCompartment Id="c4c9ac54-5b4d-4ab9-adae-f3df541f3107" absoluteBounds="6.265, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
@@ -38,10 +38,10 @@
         <elementListCompartment Id="2ffa27c1-15b4-41aa-9201-b5a86b5d95bb" absoluteBounds="0.765, 6.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6a1155b3-3e28-4607-925f-f69c7b4e8d26" absoluteBounds="6.75, 3.75, 2, 1.9631982421874996">
+    <classShape Id="6a1155b3-3e28-4607-925f-f69c7b4e8d26" absoluteBounds="5.5, 5.75, 2, 1.9631982421874996">
       <DataClassMoniker Name="/BillsBaseDataContext/RecipientView" />
       <nestedChildShapes>
-        <elementListCompartment Id="84675dfa-81e0-4eba-b4f3-d7a906164b8d" absoluteBounds="6.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="84675dfa-81e0-4eba-b4f3-d7a906164b8d" absoluteBounds="5.515, 6.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(5.5 : 4.25); (5.875 : 3.875); (5.875 : 1.91959757486979); (6.25 : 1.91959757486979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
@@ -58,26 +58,32 @@
         <classShapeMoniker Id="a3f3c5cc-914f-4686-a559-77ae05de8c41" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 1.92307657877604); (3.5 : 1.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 1.81961759749349); (3.19791666666667 : 1.81961759749349 : JumpStart); (3.36458333333333 : 1.81961759749349 : JumpEnd); (3.5 : 1.81961759749349)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BillsBaseDataContext/City/City_Recipient" />
       <nodes>
         <classShapeMoniker Id="69be4ff1-91bd-44be-a5b6-67854fe2efb8" />
         <classShapeMoniker Id="684f72f3-269b-4ac1-b395-9598fbf4017c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 3.75); (3.125 : 3.375); (3.125 : 1.36778628938802); (3.5 : 1.36778628938802)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 3.75); (3.125 : 3.375); (3.125 : 2.45631063598633); (3.19791666666667 : 2.45631063598633 : JumpStart); (3.36458333333333 : 2.45631063598633 : JumpEnd); (3.5 : 2.45631063598633)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/BillsBaseDataContext/PostCode/PostCode_Recipient" />
       <nodes>
         <classShapeMoniker Id="b726a541-a14c-4fde-95c3-16b71874c767" />
         <classShapeMoniker Id="684f72f3-269b-4ac1-b395-9598fbf4017c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.65619720525341); (3.28125 : 5.12494720525341); (3.28125 : 2.38923519498698); (3.5 : 2.38923519498698)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 5.65714495227364); (3.28125 : 5.12589495227364); (3.28125 : 1.31605679874675); (3.5 : 1.31605679874675)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/BillsBaseDataContext/Street/Street_Recipient" />
       <nodes>
         <classShapeMoniker Id="7f1f321c-6bbc-4599-90fc-ec0458cf1783" />
         <classShapeMoniker Id="684f72f3-269b-4ac1-b395-9598fbf4017c" />
       </nodes>
     </associationConnector>
+    <classShape Id="608b0307-328b-4eb4-a9c9-49b01f44c5e2" absoluteBounds="3.375, 5.875, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/BillsBaseDataContext/MainView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c79d09af-35fc-4326-89bc-711db8f5cc5c" absoluteBounds="3.3899999999999997, 6.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

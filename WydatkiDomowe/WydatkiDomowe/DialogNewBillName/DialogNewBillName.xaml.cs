@@ -27,33 +27,33 @@ namespace WydatkiDomowe
             InitializeComponent();
             homeBase = db;
             collectionListView = new CollectionListView<BillName>(db);
-            LoadListView();
+            loadListView();
         }
 
-        private void LoadListView()
+        private void loadListView()
         {
             collectionListView.LoadCollection();
             listViewBillName.ItemsSource = collectionListView.Collection;
         }
 
-        private void RefreshListView()
+        private void refreshListView()
         {
             collectionListView.RefreshCollection();
         }
 
-        private void DialogRecipientCancel_Click(object sender, RoutedEventArgs e)
+        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }
 
-        private void DialogBillNameSave_Click(object sender, RoutedEventArgs e)
+        private void dialogBillNameSave_Click(object sender, RoutedEventArgs e)
         {
             BillName newBillName = new BillName();
             newBillName.Name = dialogBillName.Text;
             newBillName.RequiredDate = (DateTime) dialogBillNameDate.SelectedDate;
             homeBase.BillNames.InsertOnSubmit(newBillName);
             homeBase.SubmitChanges();
-            RefreshListView();
+            refreshListView();
         }
     }
 }

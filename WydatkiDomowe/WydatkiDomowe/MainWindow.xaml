@@ -12,8 +12,8 @@
         <Grid Grid.Row="0">
             <Menu HorizontalAlignment="Stretch" Name="menuAdd" VerticalAlignment="Stretch" Background="GhostWhite">
                 <MenuItem Header="Dodaj">
-                    <MenuItem Header="Nowy odbiorca" ToolTip="Dodaj nowego odbiorcę" Click="NewRecipient_Click" />
-                    <MenuItem Header="Nowy rachunek" ToolTip="Dodaj nowegy rachunek" Click="NewBillName_Click" />
+                    <MenuItem Header="Nowy odbiorca" ToolTip="Dodaj nowego odbiorcę" Click="newRecipient_Click" />
+                    <MenuItem Header="Nowy rachunek" ToolTip="Dodaj nowegy rachunek" Click="newBillName_Click" />
                 </MenuItem>
             </Menu>
         </Grid>
@@ -35,18 +35,18 @@
 
             <Label Content="Data wpłaty: " Height="26" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Width="111" Grid.Column="3" Margin="5,0,0,0" />
             <DatePicker x:Name="mainPaymentDate" Grid.Column="3" Height="24" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="" />
-            <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4"/>
+            <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Click="mainSave_Click"/>
             <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="97,26,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" />
         </Grid>
         <Grid Grid.Row="3">
-            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBill" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBills" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Rachunek" Width="150" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Odbiorca" Width="150" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Kwota" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat=\{0:d\}}" />
-                        <GridViewColumn Header="Data wpłaty" Width="150" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Termin zapłaty" Width="150" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Rachunek" Width="150" DisplayMemberBinding="{Binding Bill}" />
+                        <GridViewColumn Header="Odbiorca" Width="150" DisplayMemberBinding="{Binding Recipient}" />
+                        <GridViewColumn Header="Kwota" Width="150" DisplayMemberBinding="{Binding Path=Amount, StringFormat=\{0:F\}}" />
+                        <GridViewColumn Header="Data wpłaty" Width="150" DisplayMemberBinding="{Binding Path=PaymentDate, StringFormat=\{0:d\}}" />
+                        <GridViewColumn Header="Termin zapłaty" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat=\{0:d\}}" />
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HouseholdExpenses" Class="BillsBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ASUSTEODOR\SQLEXPRESS;Initial Catalog=HouseholdExpenses;Integrated Security=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="Expenses.BillName" Member="BillNames">
     <Type Name="BillName">
       <Column Name="BillNameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="RequiredDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="BillName_Bill" Member="Bills" ThisKey="BillNameID" OtherKey="BillNameID" Type="Bill" />
+      <Association Name="BillName_Bill" Member="Bills" ThisKey="BillNameID" OtherKey="BillNameID" Type="Bills" />
     </Type>
   </Table>
   <Table Name="Expenses.Bills" Member="Bills">
-    <Type Name="Bill">
+    <Type Name="Bills">
       <Column Name="BillsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BillNameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
@@ -42,7 +42,7 @@
       <Column Name="StreetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="BuildingNR" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
       <Column Name="Account" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
-      <Association Name="Recipient_Bill" Member="Bills" ThisKey="RecipientID" OtherKey="RecipientID" Type="Bill" />
+      <Association Name="Recipient_Bill" Member="Bills" ThisKey="RecipientID" OtherKey="RecipientID" Type="Bills" />
       <Association Name="City_Recipient" Member="City" ThisKey="CityID" OtherKey="CityID" Type="City" IsForeignKey="true" />
       <Association Name="PostCode_Recipient" Member="PostCode" ThisKey="PostCodeID" OtherKey="PostCodeID" Type="PostCode" IsForeignKey="true" />
       <Association Name="Street_Recipient" Member="Street" ThisKey="StreetID" OtherKey="StreetID" Type="Street" IsForeignKey="true" />
@@ -63,6 +63,15 @@
       <Column Name="BuildingNR" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
       <Column Name="PostCode" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
       <Column Name="City" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.MainView" Member="MainViews">
+    <Type Name="MainView">
+      <Column Name="Bill" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Recipient" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RequiredDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

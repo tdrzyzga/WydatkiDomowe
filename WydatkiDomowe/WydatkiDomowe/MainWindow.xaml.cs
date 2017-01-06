@@ -20,27 +20,66 @@ namespace WydatkiDomowe
     public partial class MainWindow : Window
     {
         private BillsBaseDataContext dateBase { get; set; }
+        private CollectionListView<MainView> collectionListView;
+        private int recipientID;
+        private DateTime paymentDate;
+        private decimal amount;
+        private int billNameID;
+
         public MainWindow()
         {
             InitializeComponent();
             dateBase = new BillsBaseDataContext();
-            mainBillName.ItemsSource = dateBase.GetTable<BillName>();
-            mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
+            collectionListView = new CollectionListView<MainView>(dateBase);
+            loadDateToWindow();
         }
 
-        private void NewRecipient_Click(object sender, RoutedEventArgs e)
+        private void loadDateToWindow()
+        {
+            mainBillName.ItemsSource = dateBase.GetTable<BillName>();
+            mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
+            loadListView();
+        }
+
+        private void loadListView()
+        {
+            collectionListView.LoadCollection();
+            listViewBills.ItemsSource = collectionListView.Collection;
+        }
+
+        private void newRecipient_Click(object sender, RoutedEventArgs e)
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
             newRecipient.Close();
         }
 
-        private void NewBillName_Click(object sender, RoutedEventArgs e)
+        private void newBillName_Click(object sender, RoutedEventArgs e)
         {
             DialogNewBillName newBillName = new DialogNewBillName(dateBase);
             newBillName.ShowDialog();
             newBillName.Close();
         }
 
+        private void mainSave_Click(object sender, RoutedEventArgs e)
+        {
+            NewBill newBill = new NewBill(dateBase);
+            downloadDateFromWindow();
+            newBill.AddItem(recipientID, billNameID, amount, paymentDate);
+            refreshListView();
+        }
+
+        private void downloadDateFromWindow()
+        {
+            recipientID = (int)mainRecipient.SelectedValue;
+            billNameID = (int)mainBillName.SelectedValue;
+            amount = decimal.Parse(mainAmount.Text);
+            paymentDate = (DateTime) mainPaymentDate.SelectedDate;
+        }
+
+        private void refreshListView()
+        {
+            collectionListView.RefreshCollection();
+        }
     }
 }

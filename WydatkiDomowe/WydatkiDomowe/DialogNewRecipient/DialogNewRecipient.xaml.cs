@@ -35,26 +35,26 @@ namespace WydatkiDomowe
             InitializeComponent();
             dateBase = db;
             collectionListView = new CollectionListView<RecipientView>(db);
-            LoadDateToWindow();
+            loadDateToWindow();
         }
 
-        private void LoadDateToWindow()
+        private void loadDateToWindow()
         {
             dialogRecipientCity.ItemsSource = dateBase.GetTable<City>();
             dialogRecipientStreet.ItemsSource = dateBase.GetTable<Street>();
             dialogRecipientPostCode.ItemsSource = dateBase.GetTable<PostCode>();
-            LoadListView();
+            loadListView();
         }
 
-        private void DialogRecipientSave_Click(object sender, RoutedEventArgs e)
+        private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
         {
             NewRecipient newRecipient = new NewRecipient(dateBase);
-            DownloadDateFromWindow();
+            downloadDateFromWindow();
             newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
-            RefreshListView();
+            refreshListView();
         }
 
-        private void DownloadDateFromWindow()
+        private void downloadDateFromWindow()
         {
             name = dialogRecipientName.Text;
             account = dialogRecipientAccount.Text;
@@ -63,18 +63,18 @@ namespace WydatkiDomowe
             city = new Tuple<string, object>(dialogRecipientCity.Text, dialogRecipientCity.SelectedValue);
             postCode = new Tuple<string, object>(dialogRecipientPostCode.Text, dialogRecipientPostCode.SelectedValue);
         }
-        private void DialogRecipientCancel_Click(object sender, RoutedEventArgs e)
+        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }
 
-        private void LoadListView()
+        private void loadListView()
         {
             collectionListView.LoadCollection();
             listViewRecipient.ItemsSource = collectionListView.Collection;
         }
 
-        private void RefreshListView()
+        private void refreshListView()
         {
             collectionListView.RefreshCollection();
         }

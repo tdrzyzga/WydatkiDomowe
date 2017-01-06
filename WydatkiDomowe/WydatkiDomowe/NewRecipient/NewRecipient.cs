@@ -22,10 +22,10 @@ namespace WydatkiDomowe
             Recipient newRecipient = new Recipient();
             newRecipient.Name = name;
             newRecipient.Account = account;      
-            newRecipient.StreetID = AddItem<Street>(street);
+            newRecipient.StreetID = addItem<Street>(street);
             newRecipient.BuildingNR = buildingNr;
-            newRecipient.PostCodeID = AddItem<PostCode>(postCode);
-            newRecipient.CityID = AddItem<City>(city);
+            newRecipient.PostCodeID = addItem<PostCode>(postCode);
+            newRecipient.CityID = addItem<City>(city);
             
             dateBase.Recipients.InsertOnSubmit(newRecipient);
             dateBase.SubmitChanges();
@@ -35,7 +35,7 @@ namespace WydatkiDomowe
             return ID;
         }
 
-        private int AddItem<T>(Tuple<string, object> item) where T: INameInterface, new() 
+        private int addItem<T>(Tuple<string, object> item) where T: INameInterface, new() 
         {
             int ID;
 
