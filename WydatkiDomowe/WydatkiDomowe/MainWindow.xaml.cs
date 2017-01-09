@@ -28,8 +28,9 @@ namespace WydatkiDomowe
 
         public MainWindow()
         {
-            InitializeComponent();
             dateBase = new BillsBaseDataContext();
+            InitializeComponent();
+
             collectionListView = new CollectionListView<MainView>(dateBase);
             loadDateToWindow();
         }
@@ -52,7 +53,7 @@ namespace WydatkiDomowe
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
             if (newRecipient.Result)
-                mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
+               
             newRecipient.Close();
         }
 
@@ -62,8 +63,6 @@ namespace WydatkiDomowe
             newBillName.ShowDialog();
             if (newBillName.Result)
             {
-                mainBillName.ItemsSource = null;
-                mainBillName.ItemsSource = dateBase.BillNames;
 
             }
             newBillName.Close();
