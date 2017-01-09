@@ -36,8 +36,8 @@ namespace WydatkiDomowe
 
         private void loadDateToWindow()
         {
-            mainBillName.ItemsSource = dateBase.GetTable<BillName>();
-            mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
+            mainBillName.ItemsSource = dateBase.BillNames;
+            mainRecipient.ItemsSource = dateBase.Recipients;
             loadListView();
         }
 
@@ -62,9 +62,9 @@ namespace WydatkiDomowe
             newBillName.ShowDialog();
             if (newBillName.Result)
             {
-                mainBillName.ItemsSource = dateBase.GetTable<BillName>();
-                mainBillName.Items.Refresh();
-                
+                mainBillName.ItemsSource = null;
+                mainBillName.ItemsSource = dateBase.BillNames;
+
             }
             newBillName.Close();
         }

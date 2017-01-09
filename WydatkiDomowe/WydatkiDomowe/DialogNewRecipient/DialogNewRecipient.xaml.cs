@@ -41,9 +41,9 @@ namespace WydatkiDomowe
 
         private void loadDateToWindow()
         {
-            dialogRecipientCity.ItemsSource = dateBase.GetTable<City>();
-            dialogRecipientStreet.ItemsSource = dateBase.GetTable<Street>();
-            dialogRecipientPostCode.ItemsSource = dateBase.GetTable<PostCode>();
+            dialogRecipientCity.ItemsSource = dateBase.Cities;
+            dialogRecipientStreet.ItemsSource = dateBase.Streets;
+            dialogRecipientPostCode.ItemsSource = dateBase.PostCodes;
             loadListView();
         }
 
