@@ -27,7 +27,7 @@
 
             </Grid.ColumnDefinitions>
             <Label Content="Rachunek: " HorizontalAlignment="Left" Name="label0" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
-            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" />
+            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" IsSynchronizedWithCurrentItem="False" />
             <Label Content="Odbiorca: " Grid.Column="1" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
             <ComboBox x:Name="mainRecipient" Grid.Column="1" DisplayMemberPath="Name" SelectedValuePath="RecipientID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" />
             <Label Content="Kwota: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="2" Margin="5,0,0,28" Grid.ColumnSpan="2" Width="42" />
@@ -45,8 +45,8 @@
                         <GridViewColumn Header="Rachunek" Width="150" DisplayMemberBinding="{Binding Bill}" />
                         <GridViewColumn Header="Odbiorca" Width="150" DisplayMemberBinding="{Binding Recipient}" />
                         <GridViewColumn Header="Kwota" Width="150" DisplayMemberBinding="{Binding Path=Amount, StringFormat=\{0:F\}}" />
-                        <GridViewColumn Header="Data wpłaty" Width="150" DisplayMemberBinding="{Binding Path=PaymentDate, StringFormat=\{0:d\}}" />
-                        <GridViewColumn Header="Termin zapłaty" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat=\{0:d\}}" />
+                        <GridViewColumn Header="Data wpłaty" Width="150" DisplayMemberBinding="{Binding Path=PaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}" />
+                        <GridViewColumn Header="Termin zapłaty" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat= \{0:dd\-MM\-yyyy\}}" />
                     </GridView>
                 </ListView.View>
             </ListView>

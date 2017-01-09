@@ -19,6 +19,7 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class DialogNewBillName : Window
     {
+        public bool Result { get; private set; }
         private BillsBaseDataContext homeBase;
         private CollectionListView<BillName> collectionListView;
 
@@ -28,6 +29,7 @@ namespace WydatkiDomowe
             homeBase = db;
             collectionListView = new CollectionListView<BillName>(db);
             loadListView();
+            Result = false;
         }
 
         private void loadListView()
@@ -54,6 +56,7 @@ namespace WydatkiDomowe
             homeBase.BillNames.InsertOnSubmit(newBillName);
             homeBase.SubmitChanges();
             refreshListView();
+            Result = true;
         }
     }
 }

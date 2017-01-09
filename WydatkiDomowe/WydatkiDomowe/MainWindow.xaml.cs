@@ -51,6 +51,8 @@ namespace WydatkiDomowe
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
+            if (newRecipient.Result)
+                mainRecipient.ItemsSource = dateBase.GetTable<Recipient>();
             newRecipient.Close();
         }
 
@@ -58,6 +60,12 @@ namespace WydatkiDomowe
         {
             DialogNewBillName newBillName = new DialogNewBillName(dateBase);
             newBillName.ShowDialog();
+            if (newBillName.Result)
+            {
+                mainBillName.ItemsSource = dateBase.GetTable<BillName>();
+                mainBillName.Items.Refresh();
+                
+            }
             newBillName.Close();
         }
 

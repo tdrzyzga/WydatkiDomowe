@@ -64,6 +64,7 @@ namespace WydatkiDomowe
             }
             else
                 ID = (int)item.Item2;
+
             return ID;
         }                
     }

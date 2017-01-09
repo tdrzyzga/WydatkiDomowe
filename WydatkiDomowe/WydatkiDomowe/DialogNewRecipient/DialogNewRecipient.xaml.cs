@@ -20,7 +20,7 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class DialogNewRecipient : Window
     {
-
+        public bool Result { get; private set; }
         private CollectionListView<RecipientView> collectionListView;
         private BillsBaseDataContext dateBase;
         private Tuple<string, object> street;
@@ -36,6 +36,7 @@ namespace WydatkiDomowe
             dateBase = db;
             collectionListView = new CollectionListView<RecipientView>(db);
             loadDateToWindow();
+            Result = false;
         }
 
         private void loadDateToWindow()
@@ -52,6 +53,7 @@ namespace WydatkiDomowe
             downloadDateFromWindow();
             newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
             refreshListView();
+            Result = true;
         }
 
         private void downloadDateFromWindow()
