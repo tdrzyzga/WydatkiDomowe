@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace WydatkiDomowe
 {
@@ -21,6 +22,7 @@ namespace WydatkiDomowe
     public partial class DialogNewRecipient : Window
     {
         public bool Result { get; private set; }
+
         private CollectionListView<RecipientView> collectionListView;
         private BillsBaseDataContext dateBase;
         private Tuple<string, object> street;
@@ -29,14 +31,19 @@ namespace WydatkiDomowe
         private string name;
         private string account;
         private string buildingNr;
+        private CorrectRecipient correctRecipient;
 
         public DialogNewRecipient(BillsBaseDataContext db)
         {
+            correctRecipient = new CorrectRecipient();
+
             InitializeComponent();
+
             dateBase = db;
             collectionListView = new CollectionListView<RecipientView>(db);
             loadDateToWindow();
-            Result = false;
+
+            Result = false;        
         }
 
         private void loadDateToWindow()
@@ -44,16 +51,27 @@ namespace WydatkiDomowe
             dialogRecipientCity.ItemsSource = dateBase.Cities;
             dialogRecipientStreet.ItemsSource = dateBase.Streets;
             dialogRecipientPostCode.ItemsSource = dateBase.PostCodes;
+            dialogRecipientGrid.DataContext = correctRecipient;
             loadListView();
+        }
+        
+        private void loadListView()
+        {
+            collectionListView.LoadCollection();
+            listViewRecipient.ItemsSource = collectionListView.Collection;
         }
 
         private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
         {
-            NewRecipient newRecipient = new NewRecipient(dateBase);
             downloadDateFromWindow();
-            newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
-            refreshListView();
-            Result = true;
+
+            if (checkCorrectData())
+            {
+                NewRecipient newRecipient = new NewRecipient(dateBase);
+                newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
+                refreshListView();
+                Result = true;
+            }
         }
 
         private void downloadDateFromWindow()
@@ -65,15 +83,16 @@ namespace WydatkiDomowe
             city = new Tuple<string, object>(dialogRecipientCity.Text, dialogRecipientCity.SelectedValue);
             postCode = new Tuple<string, object>(dialogRecipientPostCode.Text, dialogRecipientPostCode.SelectedValue);
         }
+
+        private bool checkCorrectData()
+        {
+            correctRecipient.CheckData(name, account, street, buildingNr, postCode, city);
+            return correctRecipient.Result;
+        }            
+
         private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-        }
-
-        private void loadListView()
-        {
-            collectionListView.LoadCollection();
-            listViewRecipient.ItemsSource = collectionListView.Collection;
         }
 
         private void refreshListView()

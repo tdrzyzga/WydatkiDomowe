@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 
 namespace WydatkiDomowe
 {
@@ -50,13 +51,22 @@ namespace WydatkiDomowe
 
         private void dialogBillNameSave_Click(object sender, RoutedEventArgs e)
         {
-            BillName newBillName = new BillName();
-            newBillName.Name = dialogBillName.Text;
-            newBillName.RequiredDate = (DateTime) dialogBillNameDate.SelectedDate;
-            homeBase.BillNames.InsertOnSubmit(newBillName);
-            homeBase.SubmitChanges();
-            refreshListView();
-            Result = true;
+            try
+            {
+                BillName newBillName = new BillName();
+                newBillName.Name = dialogBillName.Text;
+                newBillName.RequiredDate = (DateTime)dialogBillNameDate.SelectedDate;
+                homeBase.BillNames.InsertOnSubmit(newBillName);
+                homeBase.SubmitChanges();
+                refreshListView();
+                Result = true;
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Message.Contains("U_BillName"))
+                    MessageBox.Show("Podana nazwa rachunku już istnieje w bazie danych!");
+            }
+
         }
     }
 }

@@ -146,7 +146,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.PostCode")]
-    public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -351,7 +351,7 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bill", Storage="_Bills", ThisKey="BillNameID", OtherKey="BillNameID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_Bills", ThisKey="BillNameID", OtherKey="BillNameID")]
 		public EntitySet<Bills> Bills
 		{
 			get
@@ -548,7 +548,7 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bill", Storage="_BillName", ThisKey="BillNameID", OtherKey="BillNameID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_BillName", ThisKey="BillNameID", OtherKey="BillNameID", IsForeignKey=true)]
 		public BillName BillName
 		{
 			get
@@ -582,7 +582,7 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recipient_Bill", Storage="_Recipient", ThisKey="RecipientID", OtherKey="RecipientID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recipient_Bills", Storage="_Recipient", ThisKey="RecipientID", OtherKey="RecipientID", IsForeignKey=true)]
 		public Recipient Recipient
 		{
 			get
@@ -638,7 +638,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.City")]
-    public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -960,7 +960,7 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recipient_Bill", Storage="_Bills", ThisKey="RecipientID", OtherKey="RecipientID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recipient_Bills", Storage="_Bills", ThisKey="RecipientID", OtherKey="RecipientID")]
 		public EntitySet<Bills> Bills
 		{
 			get
@@ -1109,7 +1109,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.Street")]
-    public partial class Street : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	public partial class Street : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);

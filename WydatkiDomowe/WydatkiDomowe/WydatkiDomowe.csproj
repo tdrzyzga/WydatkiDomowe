@@ -81,9 +81,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CollectionListView\CollectionListView.cs" />
+    <Compile Include="CorrectData\CorrectData.cs" />
     <Compile Include="DialogNewBillName\DialogNewBillName.xaml.cs">
       <DependentUpon>DialogNewBillName.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogNewRecipient\CorrectRecipient.cs" />
     <Compile Include="DialogNewRecipient\DialogNewRecipient.xaml.cs" />
     <Compile Include="INameInterface\INameInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">
