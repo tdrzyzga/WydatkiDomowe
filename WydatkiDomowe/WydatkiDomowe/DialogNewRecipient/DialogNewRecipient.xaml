@@ -48,8 +48,16 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Label Content="Ulica: " HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" Height="26"/>
-            <ComboBox x:Name="dialogRecipientStreet"  DisplayMemberPath="Name" SelectedValuePath="StreetID" IsEditable="True" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" Style="{Binding}">
-
+            <ComboBox x:Name="dialogRecipientStreet"  DisplayMemberPath="Name" SelectedValuePath="StreetID" IsEditable="True" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectStreet, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
             </ComboBox>
             <Label Content="Nr: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="1" Margin="5,0,0,28" Width="37" />
             <TextBox x:Name="dialogRecipientBuildingNr" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" VerticalAlignment="Top" Width="37" Grid.Column="1" Height="24" MaxLength="5" DataContext="{Binding}">
@@ -65,11 +73,27 @@
             </TextBox>
             <Label Content="Kod pocztowy: " HorizontalAlignment="Left" Name="label5" VerticalAlignment="Top" MinWidth="78" Grid.Column="2" Margin="5,0,0,0" Height="26" Width="108"/>
             <ComboBox x:Name="dialogRecipientPostCode"  DisplayMemberPath="Name" SelectedValuePath="PostCodeID" IsEditable="True" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" VerticalAlignment="Top" Width="108" Grid.Column="2" Height="24">
-
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectPostCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
             </ComboBox>
             <Label Content="Miasto: " HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" MinWidth="180" Grid.Column="3" Margin="5,0,0,0" Height="26" Width="180"/>
             <ComboBox x:Name="dialogRecipientCity" DisplayMemberPath="Name" SelectedValuePath="CityID" IsEditable="True" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="216" VerticalAlignment="Top" Width="216" Grid.Column="3" Height="24">
-
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectCity, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
             </ComboBox>
         </Grid>
         <Grid Grid.Row="2">

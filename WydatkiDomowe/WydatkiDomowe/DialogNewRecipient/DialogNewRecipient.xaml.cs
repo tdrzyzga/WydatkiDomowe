@@ -35,7 +35,7 @@ namespace WydatkiDomowe
 
         public DialogNewRecipient(BillsBaseDataContext db)
         {
-            correctRecipient = new CorrectRecipient();
+            correctRecipient = new CorrectRecipient(db);
 
             InitializeComponent();
 
@@ -63,9 +63,7 @@ namespace WydatkiDomowe
 
         private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
         {
-            downloadDateFromWindow();
-
-            if (checkCorrectData())
+            if (CheckCorrectData())
             {
                 NewRecipient newRecipient = new NewRecipient(dateBase);
                 newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
@@ -84,8 +82,10 @@ namespace WydatkiDomowe
             postCode = new Tuple<string, object>(dialogRecipientPostCode.Text, dialogRecipientPostCode.SelectedValue);
         }
 
-        private bool checkCorrectData()
+        private bool CheckCorrectData()
         {
+            downloadDateFromWindow();
+
             correctRecipient.CheckData(name, account, street, buildingNr, postCode, city);
             return correctRecipient.Result;
         }            
