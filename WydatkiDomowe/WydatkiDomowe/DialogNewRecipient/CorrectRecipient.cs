@@ -17,7 +17,7 @@ namespace WydatkiDomowe
         public bool IncorrectStreet { get; private set; }
         public bool IncorrectCity { get; private set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private BillsBaseDataContext dateBase;
 
@@ -43,9 +43,9 @@ namespace WydatkiDomowe
             if (isIncorrect())
             {
                 Result = false;
-                MessageBox.Show(warnings);
+                MessageBox.Show(warnings, "Niepoprawne dane!");
             }
-        }
+         }
 
         private bool isIncorrect()
         {
@@ -64,6 +64,8 @@ namespace WydatkiDomowe
             }
             else
             {
+                city.Trim();
+
                 if (CorrectData.containsNumbers(city))
                 {
                     warnings += "\nNazwa miasta zawiera liczby!";
@@ -92,6 +94,8 @@ namespace WydatkiDomowe
             }
             else
             {
+                postCode.Trim();
+
                 if (CorrectData.containsLetters(postCode))
                 {
                     warnings += "\nKod pocztowy zawiera litery!";
@@ -139,6 +143,8 @@ namespace WydatkiDomowe
             }
             else
             {
+                street.Trim();
+
                 if (CorrectData.containsNumbers(street))
                 {
                     warnings += "\nNazwa ulicy zawiera liczby!";
@@ -169,6 +175,8 @@ namespace WydatkiDomowe
             }
             else
             {
+                account.Trim();
+
                 if (CorrectData.isTooShort(account))
                 {
                     warnings += "\nZa krótki numer konta!";
@@ -212,6 +220,8 @@ namespace WydatkiDomowe
             }
             else
             {
+                name.Trim();
+
                 if (existInDatebase(name))
                 {
                     warnings += "Podana nazwa odbiorcy isnieje już w bazie danych!";
@@ -230,7 +240,7 @@ namespace WydatkiDomowe
 
         private bool existInDatebase(string name)
         {
-            return dateBase.Recipients.Any(i => i.Name == name);  
+            return dateBase.Recipients.Any(i=> i.Name == name);  
         }
 
         private void resetField()
@@ -246,9 +256,7 @@ namespace WydatkiDomowe
                 
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
