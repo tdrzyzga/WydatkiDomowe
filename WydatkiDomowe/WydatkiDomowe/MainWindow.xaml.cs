@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace WydatkiDomowe
 {
@@ -18,7 +19,7 @@ namespace WydatkiDomowe
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {      
         private BillsBaseDataContext dateBase { get; set; }
         private CollectionListView<MainView> collectionListView;
         private int recipientID;
@@ -53,7 +54,7 @@ namespace WydatkiDomowe
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
             if (newRecipient.Result)
-               
+                
             newRecipient.Close();
         }
 

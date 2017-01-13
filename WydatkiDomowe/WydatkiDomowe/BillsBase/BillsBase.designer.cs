@@ -146,7 +146,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.PostCode")]
-	public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+    public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -638,7 +638,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.City")]
-	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+    public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);

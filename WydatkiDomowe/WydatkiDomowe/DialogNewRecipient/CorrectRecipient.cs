@@ -74,7 +74,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(city))
             {
-                warnings += "\nWprowadź nazwę miasta!";
+                warnings += "Wprowadź nazwę miasta!\n";
                 IncorrectCity = true;
                 OnPropertyChanged("IncorrectCity");
             }
@@ -84,7 +84,7 @@ namespace WydatkiDomowe
 
                 if (CorrectData.containsNumbers(city))
                 {
-                    warnings += "\nNazwa miasta zawiera liczby!";
+                    warnings += "Nazwa miasta zawiera liczby!\n";
                     IncorrectCity = true;
                     OnPropertyChanged("IncorrectCity");
                 }
@@ -104,7 +104,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(postCode))
             {
-                warnings += "\nWprowadź kod pocztowy!";
+                warnings += "Wprowadź kod pocztowy!\n";
                 IncorrectPostCode = true;
                 OnPropertyChanged("IncorrectPostCode");
             }
@@ -114,7 +114,7 @@ namespace WydatkiDomowe
 
                 if (CorrectData.containsLetters(postCode))
                 {
-                    warnings += "\nKod pocztowy zawiera litery!";
+                    warnings += "Kod pocztowy zawiera litery!\n";
                     IncorrectPostCode = true;
                     OnPropertyChanged("IncorrectPostCode");
                 }
@@ -134,7 +134,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(buildingNr))
             {
-                warnings += "\nWprowadź numer budynku!";
+                warnings += "Wprowadź numer budynku!\n";
                 IncorrectBuildingNr = true;
                 OnPropertyChanged("IncorrectBuildingNr");
             }
@@ -153,7 +153,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(street))
             {
-                warnings += "\nWprowadź nazwę ulicy!";
+                warnings += "Wprowadź nazwę ulicy!\n";
                 IncorrectStreet = true;
                 OnPropertyChanged("IncorrectStreet");
             }
@@ -163,7 +163,7 @@ namespace WydatkiDomowe
 
                 if (CorrectData.containsNumbers(street))
                 {
-                    warnings += "\nNazwa ulicy zawiera liczby!";
+                    warnings += "Nazwa ulicy zawiera liczby!\n";
                     IncorrectStreet = true;
                     OnPropertyChanged("IncorrectStreet");
                 }
@@ -185,7 +185,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(account))
             {
-                warnings += "\nWprowadź numer konta!";
+                warnings += "Wprowadź numer konta!\n";
                 IncorrectAccount = true;
                 OnPropertyChanged("IncorrectAccount");
             }
@@ -195,7 +195,7 @@ namespace WydatkiDomowe
 
                 if (CorrectData.isTooShort(account))
                 {
-                    warnings += "\nZa krótki numer konta!";
+                    warnings += "Za krótki numer konta!\n";
                     isShort = true;
                 }
                 else
@@ -203,7 +203,7 @@ namespace WydatkiDomowe
 
                 if (CorrectData.containsLetters(account))
                 {
-                    warnings += "\nNumer konta zawiera litery!";
+                    warnings += "Numer konta zawiera litery!\n";
                     containsLetters = true;
                 }
                 else
@@ -230,7 +230,7 @@ namespace WydatkiDomowe
 
             if (CorrectData.isEpmty(name))
             {
-                warnings += "Wprowadź nazwę odbiorcy!";
+                warnings += "Wprowadź nazwę odbiorcy!\n";
                 IncorrectName = true;
                 OnPropertyChanged("IncorrectName");
             }
@@ -240,7 +240,7 @@ namespace WydatkiDomowe
 
                 if (existInDatebase(name))
                 {
-                    warnings += "Podana nazwa odbiorcy isnieje już w bazie danych!";
+                    warnings += "Podana nazwa odbiorcy isnieje już w bazie danych!\n";
                     IncorrectName = true;
                     OnPropertyChanged("IncorrectName");
                 }

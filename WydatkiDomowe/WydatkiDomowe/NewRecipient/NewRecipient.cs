@@ -5,12 +5,14 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Windows;
+using System.ComponentModel;
 
 namespace WydatkiDomowe
 { 
     class NewRecipient
     {
         public int ID {get; private set;}
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private BillsBaseDataContext dateBase;
         
@@ -76,6 +78,6 @@ namespace WydatkiDomowe
                 ID = (int)item.Item2;
 
             return ID;
-        }                
+        }     
     }
 }
