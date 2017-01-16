@@ -23,7 +23,7 @@ namespace WydatkiDomowe
     {
         public bool Result { get; private set; }
 
-        private CollectionListView<RecipientView> collectionListView;
+        private CollectionToView<RecipientView> collectionListView;
         private BillsBaseDataContext dateBase;
         private Tuple<string, object> street;
         private Tuple<string, object> city;
@@ -40,7 +40,7 @@ namespace WydatkiDomowe
             InitializeComponent();
 
             dateBase = db;
-            collectionListView = new CollectionListView<RecipientView>(db);
+            collectionListView = new CollectionToView<RecipientView>(db);
             loadDateToWindow();
 
             Result = false;        

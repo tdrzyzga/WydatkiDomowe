@@ -19,9 +19,11 @@ namespace WydatkiDomowe
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {      
+    {
         private BillsBaseDataContext dateBase { get; set; }
-        private CollectionListView<MainView> collectionListView;
+        private CollectionToView<MainView> collectionListView;
+        private CollectionToView<Recipient> collectionRecipient;
+        private CollectionToView<BillName> collectionBillName;
         private int recipientID;
         private DateTime paymentDate;
         private decimal amount;
@@ -32,14 +34,15 @@ namespace WydatkiDomowe
             dateBase = new BillsBaseDataContext();
             InitializeComponent();
 
-            collectionListView = new CollectionListView<MainView>(dateBase);
+            collectionListView = new CollectionToView<MainView>(dateBase);
+            collectionRecipient = new CollectionToView<Recipient>(dateBase);
+            collectionBillName = new CollectionToView<BillName>(dateBase);
             loadDateToWindow();
         }
 
         private void loadDateToWindow()
         {
-            mainBillName.ItemsSource = dateBase.BillNames;
-            mainRecipient.ItemsSource = dateBase.Recipients;
+            loadComboboxes();
             loadListView();
         }
 
@@ -49,12 +52,22 @@ namespace WydatkiDomowe
             listViewBills.ItemsSource = collectionListView.Collection;
         }
 
+        private void loadComboboxes()
+        {
+            collectionRecipient.LoadCollection();
+            mainRecipient.ItemsSource = collectionRecipient.Collection;
+            collectionBillName.LoadCollection();
+            mainBillName.ItemsSource = collectionBillName.Collection;
+        }
+
         private void newRecipient_Click(object sender, RoutedEventArgs e)
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
             if (newRecipient.Result)
-                
+            {
+                collectionRecipient.RefreshCollection();
+            }
             newRecipient.Close();
         }
 
@@ -64,7 +77,7 @@ namespace WydatkiDomowe
             newBillName.ShowDialog();
             if (newBillName.Result)
             {
-
+                collectionBillName.RefreshCollection();
             }
             newBillName.Close();
         }

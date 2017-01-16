@@ -20,7 +20,7 @@
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectName, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectName}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -32,7 +32,7 @@
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectAccount, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectAccount}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -52,7 +52,7 @@
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectStreet, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectStreet}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -64,7 +64,7 @@
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectBuildingNr, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectBuildingNr}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -76,7 +76,7 @@
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectPostCode, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectPostCode}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -88,7 +88,7 @@
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IncorrectCity, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <DataTrigger Binding="{Binding Path=IncorrectCity}" Value="True">
                                 <Setter Property="BorderBrush" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>

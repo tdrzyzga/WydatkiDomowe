@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.Data.Linq;
 
 namespace WydatkiDomowe
 {
-    class CollectionListView<T> where T: class
+    class CollectionToView<T> where T : class
     {
         public ObservableCollection<T> Collection{get; private set;}
         private BillsBaseDataContext dateBase;
 
-        public CollectionListView(BillsBaseDataContext db)
+        public CollectionToView(BillsBaseDataContext db)
         {
             Collection = new ObservableCollection<T>();
             dateBase = db;

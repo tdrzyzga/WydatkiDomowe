@@ -12,7 +12,6 @@ namespace WydatkiDomowe
     class NewRecipient
     {
         public int ID {get; private set;}
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private BillsBaseDataContext dateBase;
         

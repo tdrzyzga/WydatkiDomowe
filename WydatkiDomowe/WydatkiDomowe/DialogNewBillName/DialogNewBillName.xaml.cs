@@ -22,13 +22,13 @@ namespace WydatkiDomowe
     {
         public bool Result { get; private set; }
         private BillsBaseDataContext homeBase;
-        private CollectionListView<BillName> collectionListView;
+        private CollectionToView<BillName> collectionListView;
 
         public DialogNewBillName(BillsBaseDataContext db)
         {
             InitializeComponent();
             homeBase = db;
-            collectionListView = new CollectionListView<BillName>(db);
+            collectionListView = new CollectionToView<BillName>(db);
             loadListView();
             Result = false;
         }
