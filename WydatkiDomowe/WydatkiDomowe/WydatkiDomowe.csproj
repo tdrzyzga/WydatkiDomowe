@@ -80,13 +80,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CollectionListView\CollectionListView.cs" />
+    <Compile Include="CollectionToView\CollectionListView.cs" />
     <Compile Include="CorrectData\CorrectData.cs" />
     <Compile Include="DialogNewBillName\DialogNewBillName.xaml.cs">
       <DependentUpon>DialogNewBillName.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogNewRecipient\CorrectRecipient.cs" />
     <Compile Include="DialogNewRecipient\DialogNewRecipient.xaml.cs" />
+    <Compile Include="EditableComboBox\UIHelper.cs" />
+    <Compile Include="EditableComboBox\EditableComboBox.cs" />
     <Compile Include="INameInterface\INameInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -64,10 +64,10 @@ namespace WydatkiDomowe
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
             newRecipient.ShowDialog();
+
             if (newRecipient.Result)
-            {
                 collectionRecipient.RefreshCollection();
-            }
+
             newRecipient.Close();
         }
 
@@ -75,10 +75,10 @@ namespace WydatkiDomowe
         {
             DialogNewBillName newBillName = new DialogNewBillName(dateBase);
             newBillName.ShowDialog();
+
             if (newBillName.Result)
-            {
                 collectionBillName.RefreshCollection();
-            }
+
             newBillName.Close();
         }
 
