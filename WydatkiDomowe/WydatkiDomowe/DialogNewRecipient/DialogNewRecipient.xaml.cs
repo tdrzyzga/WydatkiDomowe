@@ -63,7 +63,7 @@ namespace WydatkiDomowe
 
         private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckCorrectData())
+            if (checkCorrectData())
             {
                 NewRecipient newRecipient = new NewRecipient(dateBase);
                 newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
@@ -82,12 +82,32 @@ namespace WydatkiDomowe
             postCode = new Tuple<string, object>(dialogRecipientPostCode.Text, dialogRecipientPostCode.SelectedValue);
         }
 
-        private bool CheckCorrectData()
+        private bool checkCorrectData()
         {
+            trimDate();
+            changeLetters();
             downloadDateFromWindow();
 
             correctRecipient.CheckData(name, account, street, buildingNr, postCode, city);
             return correctRecipient.Result;
+        }
+
+        private void changeLetters()
+        {
+            dialogRecipientName.Text = dialogRecipientName.Text.UppercaseFirst();
+            dialogRecipientStreet.Text = dialogRecipientStreet.Text.UppercaseFirst();
+            dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.UppercaseFirst();
+            dialogRecipientCity.Text = dialogRecipientCity.Text.UppercaseFirst();
+        }
+        
+        private void trimDate()
+        {
+            dialogRecipientName.Text = dialogRecipientName.Text.Trim();
+            dialogRecipientAccount.Text = dialogRecipientAccount.Text.Trim();
+            dialogRecipientStreet.Text = dialogRecipientStreet.Text.Trim();
+            dialogRecipientBuildingNr.Text = dialogRecipientBuildingNr.Text.Trim();
+            dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.Trim();
+            dialogRecipientCity.Text = dialogRecipientCity.Text.Trim();
         }            
 
         private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)

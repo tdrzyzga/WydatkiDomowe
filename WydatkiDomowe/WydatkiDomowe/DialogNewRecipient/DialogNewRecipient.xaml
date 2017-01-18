@@ -61,7 +61,7 @@
                 </ComboBox.Style>
             </ComboBox>
             <Label Content="Nr: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="1" Margin="5,0,0,28" Width="37" />
-            <TextBox x:Name="dialogRecipientBuildingNr" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" VerticalAlignment="Top" Width="37" Grid.Column="1" Height="24" MaxLength="5" DataContext="{Binding}">
+            <TextBox x:Name="dialogRecipientBuildingNr" HorizontalAlignment="Left" Margin="5,0,0,3" MinHeight="24" VerticalAlignment="Bottom" Width="37" Grid.Column="1" Height="24" MaxLength="5" DataContext="{Binding}">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>

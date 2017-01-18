@@ -40,5 +40,14 @@ namespace WydatkiDomowe
             else
                 return false;
         }
+
+        static public bool isString(string text)
+        {
+            int temp;
+            if (!Int32.TryParse(text, out temp) || !(temp>= 0))
+                return true;
+            else
+                return false;
+        }
     }
 }

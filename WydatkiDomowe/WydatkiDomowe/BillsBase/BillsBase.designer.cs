@@ -30,24 +30,24 @@ namespace WydatkiDomowe
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertPostCode(PostCode instance);
-    partial void UpdatePostCode(PostCode instance);
-    partial void DeletePostCode(PostCode instance);
-    partial void InsertBillName(BillName instance);
-    partial void UpdateBillName(BillName instance);
-    partial void DeleteBillName(BillName instance);
     partial void InsertBills(Bills instance);
     partial void UpdateBills(Bills instance);
     partial void DeleteBills(Bills instance);
     partial void InsertCity(City instance);
     partial void UpdateCity(City instance);
     partial void DeleteCity(City instance);
+    partial void InsertPostCode(PostCode instance);
+    partial void UpdatePostCode(PostCode instance);
+    partial void DeletePostCode(PostCode instance);
     partial void InsertRecipient(Recipient instance);
     partial void UpdateRecipient(Recipient instance);
     partial void DeleteRecipient(Recipient instance);
     partial void InsertStreet(Street instance);
     partial void UpdateStreet(Street instance);
     partial void DeleteStreet(Street instance);
+    partial void InsertBillName(BillName instance);
+    partial void UpdateBillName(BillName instance);
+    partial void DeleteBillName(BillName instance);
     #endregion
 		
 		public BillsBaseDataContext() : 
@@ -80,19 +80,11 @@ namespace WydatkiDomowe
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<PostCode> PostCodes
+		public System.Data.Linq.Table<RecipientView> RecipientViews
 		{
 			get
 			{
-				return this.GetTable<PostCode>();
-			}
-		}
-		
-		public System.Data.Linq.Table<BillName> BillNames
-		{
-			get
-			{
-				return this.GetTable<BillName>();
+				return this.GetTable<RecipientView>();
 			}
 		}
 		
@@ -109,6 +101,14 @@ namespace WydatkiDomowe
 			get
 			{
 				return this.GetTable<City>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PostCode> PostCodes
+		{
+			get
+			{
+				return this.GetTable<PostCode>();
 			}
 		}
 		
@@ -136,179 +136,33 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		public System.Data.Linq.Table<RecipientView> RecipientViews
+		public System.Data.Linq.Table<BillName> BillNames
 		{
 			get
 			{
-				return this.GetTable<RecipientView>();
+				return this.GetTable<BillName>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.PostCode")]
-    public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.RecipientView")]
+	public partial class RecipientView
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _PostCodeID;
 		
 		private string _Name;
 		
-		private EntitySet<Recipient> _Recipients;
+		private string _Account;
 		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPostCodeIDChanging(int value);
-    partial void OnPostCodeIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
+		private string _Street;
 		
-		public PostCode()
+		private string _BuildingNR;
+		
+		private string _PostCode;
+		
+		private string _City;
+		
+		public RecipientView()
 		{
-			this._Recipients = new EntitySet<Recipient>(new Action<Recipient>(this.attach_Recipients), new Action<Recipient>(this.detach_Recipients));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCodeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int PostCodeID
-		{
-			get
-			{
-				return this._PostCodeID;
-			}
-			set
-			{
-				if ((this._PostCodeID != value))
-				{
-					this.OnPostCodeIDChanging(value);
-					this.SendPropertyChanging();
-					this._PostCodeID = value;
-					this.SendPropertyChanged("PostCodeID");
-					this.OnPostCodeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PostCode_Recipient", Storage="_Recipients", ThisKey="PostCodeID", OtherKey="PostCodeID")]
-		public EntitySet<Recipient> Recipients
-		{
-			get
-			{
-				return this._Recipients;
-			}
-			set
-			{
-				this._Recipients.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Recipients(Recipient entity)
-		{
-			this.SendPropertyChanging();
-			entity.PostCode = this;
-		}
-		
-		private void detach_Recipients(Recipient entity)
-		{
-			this.SendPropertyChanging();
-			entity.PostCode = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.BillName")]
-	public partial class BillName : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _BillNameID;
-		
-		private string _Name;
-		
-		private System.DateTime _RequiredDate;
-		
-		private EntitySet<Bills> _Bills;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnBillNameIDChanging(int value);
-    partial void OnBillNameIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnRequiredDateChanging(System.DateTime value);
-    partial void OnRequiredDateChanged();
-    #endregion
-		
-		public BillName()
-		{
-			this._Bills = new EntitySet<Bills>(new Action<Bills>(this.attach_Bills), new Action<Bills>(this.detach_Bills));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BillNameID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int BillNameID
-		{
-			get
-			{
-				return this._BillNameID;
-			}
-			set
-			{
-				if ((this._BillNameID != value))
-				{
-					this.OnBillNameIDChanging(value);
-					this.SendPropertyChanging();
-					this._BillNameID = value;
-					this.SendPropertyChanged("BillNameID");
-					this.OnBillNameIDChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
@@ -322,78 +176,89 @@ namespace WydatkiDomowe
 			{
 				if ((this._Name != value))
 				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
 					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequiredDate", DbType="Date NOT NULL")]
-		public System.DateTime RequiredDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		public string Account
 		{
 			get
 			{
-				return this._RequiredDate;
+				return this._Account;
 			}
 			set
 			{
-				if ((this._RequiredDate != value))
+				if ((this._Account != value))
 				{
-					this.OnRequiredDateChanging(value);
-					this.SendPropertyChanging();
-					this._RequiredDate = value;
-					this.SendPropertyChanged("RequiredDate");
-					this.OnRequiredDateChanged();
+					this._Account = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_Bills", ThisKey="BillNameID", OtherKey="BillNameID")]
-		public EntitySet<Bills> Bills
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string Street
 		{
 			get
 			{
-				return this._Bills;
+				return this._Street;
 			}
 			set
 			{
-				this._Bills.Assign(value);
+				if ((this._Street != value))
+				{
+					this._Street = value;
+				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BuildingNR", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string BuildingNR
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._BuildingNR;
 			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
+			set
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				if ((this._BuildingNR != value))
+				{
+					this._BuildingNR = value;
+				}
 			}
 		}
 		
-		private void attach_Bills(Bills entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string PostCode
 		{
-			this.SendPropertyChanging();
-			entity.BillName = this;
+			get
+			{
+				return this._PostCode;
+			}
+			set
+			{
+				if ((this._PostCode != value))
+				{
+					this._PostCode = value;
+				}
+			}
 		}
 		
-		private void detach_Bills(Bills entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string City
 		{
-			this.SendPropertyChanging();
-			entity.BillName = null;
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
 		}
 	}
 	
@@ -413,9 +278,11 @@ namespace WydatkiDomowe
 		
 		private int _RecipientID;
 		
-		private EntityRef<BillName> _BillName;
+		private System.DateTime _RequiredDate;
 		
 		private EntityRef<Recipient> _Recipient;
+		
+		private EntityRef<BillName> _BillName;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -431,12 +298,14 @@ namespace WydatkiDomowe
     partial void OnPaymentDateChanged();
     partial void OnRecipientIDChanging(int value);
     partial void OnRecipientIDChanged();
+    partial void OnRequiredDateChanging(System.DateTime value);
+    partial void OnRequiredDateChanged();
     #endregion
 		
 		public Bills()
 		{
-			this._BillName = default(EntityRef<BillName>);
 			this._Recipient = default(EntityRef<Recipient>);
+			this._BillName = default(EntityRef<BillName>);
 			OnCreated();
 		}
 		
@@ -548,36 +417,22 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_BillName", ThisKey="BillNameID", OtherKey="BillNameID", IsForeignKey=true)]
-		public BillName BillName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequiredDate", DbType="Date NOT NULL")]
+		public System.DateTime RequiredDate
 		{
 			get
 			{
-				return this._BillName.Entity;
+				return this._RequiredDate;
 			}
 			set
 			{
-				BillName previousValue = this._BillName.Entity;
-				if (((previousValue != value) 
-							|| (this._BillName.HasLoadedOrAssignedValue == false)))
+				if ((this._RequiredDate != value))
 				{
+					this.OnRequiredDateChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BillName.Entity = null;
-						previousValue.Bills.Remove(this);
-					}
-					this._BillName.Entity = value;
-					if ((value != null))
-					{
-						value.Bills.Add(this);
-						this._BillNameID = value.BillNameID;
-					}
-					else
-					{
-						this._BillNameID = default(int);
-					}
-					this.SendPropertyChanged("BillName");
+					this._RequiredDate = value;
+					this.SendPropertyChanged("RequiredDate");
+					this.OnRequiredDateChanged();
 				}
 			}
 		}
@@ -616,6 +471,40 @@ namespace WydatkiDomowe
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_BillName", ThisKey="BillNameID", OtherKey="BillNameID", IsForeignKey=true)]
+		public BillName BillName
+		{
+			get
+			{
+				return this._BillName.Entity;
+			}
+			set
+			{
+				BillName previousValue = this._BillName.Entity;
+				if (((previousValue != value) 
+							|| (this._BillName.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BillName.Entity = null;
+						previousValue.Bills.Remove(this);
+					}
+					this._BillName.Entity = value;
+					if ((value != null))
+					{
+						value.Bills.Add(this);
+						this._BillNameID = value.BillNameID;
+					}
+					else
+					{
+						this._BillNameID = default(int);
+					}
+					this.SendPropertyChanged("BillName");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -638,7 +527,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.City")]
-    public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -748,6 +637,120 @@ namespace WydatkiDomowe
 		{
 			this.SendPropertyChanging();
 			entity.City = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.PostCode")]
+	public partial class PostCode : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PostCodeID;
+		
+		private string _Name;
+		
+		private EntitySet<Recipient> _Recipients;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPostCodeIDChanging(int value);
+    partial void OnPostCodeIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public PostCode()
+		{
+			this._Recipients = new EntitySet<Recipient>(new Action<Recipient>(this.attach_Recipients), new Action<Recipient>(this.detach_Recipients));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCodeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PostCodeID
+		{
+			get
+			{
+				return this._PostCodeID;
+			}
+			set
+			{
+				if ((this._PostCodeID != value))
+				{
+					this.OnPostCodeIDChanging(value);
+					this.SendPropertyChanging();
+					this._PostCodeID = value;
+					this.SendPropertyChanged("PostCodeID");
+					this.OnPostCodeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PostCode_Recipient", Storage="_Recipients", ThisKey="PostCodeID", OtherKey="PostCodeID")]
+		public EntitySet<Recipient> Recipients
+		{
+			get
+			{
+				return this._Recipients;
+			}
+			set
+			{
+				this._Recipients.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Recipients(Recipient entity)
+		{
+			this.SendPropertyChanging();
+			entity.PostCode = this;
+		}
+		
+		private void detach_Recipients(Recipient entity)
+		{
+			this.SendPropertyChanging();
+			entity.PostCode = null;
 		}
 	}
 	
@@ -1321,24 +1324,60 @@ namespace WydatkiDomowe
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.RecipientView")]
-	public partial class RecipientView
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.BillName")]
+	public partial class BillName : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BillNameID;
 		
 		private string _Name;
 		
-		private string _Account;
+		private System.DateTime _FirstPaymentDate;
 		
-		private string _Street;
+		private int _PaymentsFrequency;
 		
-		private string _BuildingNR;
+		private EntitySet<Bills> _Bills;
 		
-		private string _PostCode;
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBillNameIDChanging(int value);
+    partial void OnBillNameIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnFirstPaymentDateChanging(System.DateTime value);
+    partial void OnFirstPaymentDateChanged();
+    partial void OnPaymentsFrequencyChanging(int value);
+    partial void OnPaymentsFrequencyChanged();
+    #endregion
 		
-		private string _City;
-		
-		public RecipientView()
+		public BillName()
 		{
+			this._Bills = new EntitySet<Bills>(new Action<Bills>(this.attach_Bills), new Action<Bills>(this.detach_Bills));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BillNameID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BillNameID
+		{
+			get
+			{
+				return this._BillNameID;
+			}
+			set
+			{
+				if ((this._BillNameID != value))
+				{
+					this.OnBillNameIDChanging(value);
+					this.SendPropertyChanging();
+					this._BillNameID = value;
+					this.SendPropertyChanged("BillNameID");
+					this.OnBillNameIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
@@ -1352,89 +1391,98 @@ namespace WydatkiDomowe
 			{
 				if ((this._Name != value))
 				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
 					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
-		public string Account
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstPaymentDate", DbType="Date NOT NULL")]
+		public System.DateTime FirstPaymentDate
 		{
 			get
 			{
-				return this._Account;
+				return this._FirstPaymentDate;
 			}
 			set
 			{
-				if ((this._Account != value))
+				if ((this._FirstPaymentDate != value))
 				{
-					this._Account = value;
+					this.OnFirstPaymentDateChanging(value);
+					this.SendPropertyChanging();
+					this._FirstPaymentDate = value;
+					this.SendPropertyChanged("FirstPaymentDate");
+					this.OnFirstPaymentDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string Street
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentsFrequency", DbType="Int NOT NULL")]
+		public int PaymentsFrequency
 		{
 			get
 			{
-				return this._Street;
+				return this._PaymentsFrequency;
 			}
 			set
 			{
-				if ((this._Street != value))
+				if ((this._PaymentsFrequency != value))
 				{
-					this._Street = value;
+					this.OnPaymentsFrequencyChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentsFrequency = value;
+					this.SendPropertyChanged("PaymentsFrequency");
+					this.OnPaymentsFrequencyChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BuildingNR", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-		public string BuildingNR
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BillName_Bills", Storage="_Bills", ThisKey="BillNameID", OtherKey="BillNameID")]
+		public EntitySet<Bills> Bills
 		{
 			get
 			{
-				return this._BuildingNR;
+				return this._Bills;
 			}
 			set
 			{
-				if ((this._BuildingNR != value))
-				{
-					this._BuildingNR = value;
-				}
+				this._Bills.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string PostCode
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
 		{
-			get
+			if ((this.PropertyChanging != null))
 			{
-				return this._PostCode;
-			}
-			set
-			{
-				if ((this._PostCode != value))
-				{
-					this._PostCode = value;
-				}
+				this.PropertyChanging(this, emptyChangingEventArgs);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string City
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
-			get
+			if ((this.PropertyChanged != null))
 			{
-				return this._City;
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-			set
-			{
-				if ((this._City != value))
-				{
-					this._City = value;
-				}
-			}
+		}
+		
+		private void attach_Bills(Bills entity)
+		{
+			this.SendPropertyChanging();
+			entity.BillName = this;
+		}
+		
+		private void detach_Bills(Bills entity)
+		{
+			this.SendPropertyChanging();
+			entity.BillName = null;
 		}
 	}
 }

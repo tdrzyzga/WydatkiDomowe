@@ -19,13 +19,6 @@ namespace WydatkiDomowe
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private string name;
-        private string account;
-        private string street;
-        private string buildingNr;
-        private string postCode;
-        private string city;
-
         private BillsBaseDataContext dateBase;
 
         public CorrectRecipient(BillsBaseDataContext db)
@@ -34,27 +27,18 @@ namespace WydatkiDomowe
             resetField();
         }
 
-        public void CheckData(string nameRecipient, string accountRecipient, Tuple<string, object> streetRecipient, string buildingNrRecipient, Tuple<string, object> postCodeRecipient, Tuple<string, object> cityRecipient)
+        public void CheckData(string name, string account, Tuple<string, object> street, string buildingNr, Tuple<string, object> postCode, Tuple<string, object> city)
         {
             resetField();
-
-            name = nameRecipient;
-            account = accountRecipient;
-            street = streetRecipient.Item1;
-            buildingNr = buildingNrRecipient;
-            postCode = postCodeRecipient.Item1;
-            city = cityRecipient.Item1;
-
-
 
             string warnings = "";
 
             warnings += checkName(name);
             warnings += checkAccount(account);
-            warnings += checkStreet(street);
+            warnings += checkStreet(street.Item1);
             warnings += checkBuildingNr(buildingNr);
-            warnings += checkPostCode(postCode);
-            warnings += checkCity(city);
+            warnings += checkPostCode(postCode.Item1);
+            warnings += checkCity(city.Item1);
 
             if (isIncorrect())
             {
@@ -191,8 +175,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                account.Trim();
-
                 if (CorrectData.isTooShort(account))
                 {
                     warnings += "Za krótki numer konta!\n";
@@ -236,7 +218,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                name = name.Trim();
 
                 if (existInDatebase(name))
                 {

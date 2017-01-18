@@ -23,14 +23,28 @@ namespace WydatkiDomowe
         public bool Result { get; private set; }
         private BillsBaseDataContext homeBase;
         private CollectionToView<BillName> collectionListView;
+        private string name;
+        private DateTime firstPaymentDate;
+        private string paymentsFrequency;
+        private CorrectBillName correctBillName;
 
         public DialogNewBillName(BillsBaseDataContext db)
         {
+            correctBillName = new CorrectBillName(db);
+
             InitializeComponent();
+
             homeBase = db;
             collectionListView = new CollectionToView<BillName>(db);
-            loadListView();
+
+            loadDateToWindow();
             Result = false;
+        }
+
+        private void loadDateToWindow()
+        {
+            dialogBillNameGrid.DataContext = correctBillName;
+            loadListView();
         }
 
         private void loadListView()
@@ -51,22 +65,34 @@ namespace WydatkiDomowe
 
         private void dialogBillNameSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (checkCorrectData())
             {
                 BillName newBillName = new BillName();
-                newBillName.Name = dialogBillName.Text;
-                newBillName.RequiredDate = (DateTime)dialogBillNameDate.SelectedDate;
+                newBillName.Name = name;
+                newBillName.FirstPaymentDate = firstPaymentDate;
+                newBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
+
                 homeBase.BillNames.InsertOnSubmit(newBillName);
                 homeBase.SubmitChanges();
+
                 refreshListView();
                 Result = true;
             }
-            catch (SqlException ex)
-            {
-                if (ex.Message.Contains("U_BillName"))
-                    MessageBox.Show("Podana nazwa rachunku już istnieje w bazie danych!");
-            }
+            
+        }
 
+        private bool checkCorrectData()
+        {
+            downloadDateFromWindow();
+            correctBillName.CheckData(name, paymentsFrequency);
+            return correctBillName.Result;
+        }
+
+        private void downloadDateFromWindow()
+        {
+            name = dialogBillName.Text.Trim();
+            firstPaymentDate = (DateTime)dialogBillFirstPaymentDate.SelectedDate;
+            paymentsFrequency = dialogPaymentsFrequency.Text.Trim();
         }
     }
 }
