@@ -34,32 +34,10 @@ namespace WydatkiDomowe
             dateBase = new BillsBaseDataContext();
             InitializeComponent();
 
-            collectionListView = new CollectionToView<MainView>(dateBase);
-            collectionRecipient = new CollectionToView<Recipient>(dateBase);
-            collectionBillName = new CollectionToView<BillName>(dateBase);
+            loadCollection(dateBase);
             loadDateToWindow();
         }
-
-        private void loadDateToWindow()
-        {
-            loadComboboxes();
-            loadListView();
-        }
-
-        private void loadListView()
-        {
-            collectionListView.LoadCollection();
-            listViewBills.ItemsSource = collectionListView.Collection;
-        }
-
-        private void loadComboboxes()
-        {
-            collectionRecipient.LoadCollection();
-            mainRecipient.ItemsSource = collectionRecipient.Collection;
-            collectionBillName.LoadCollection();
-            mainBillName.ItemsSource = collectionBillName.Collection;
-        }
-
+        
         private void newRecipient_Click(object sender, RoutedEventArgs e)
         {
             DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
@@ -87,7 +65,34 @@ namespace WydatkiDomowe
             NewBill newBill = new NewBill(dateBase);
             downloadDateFromWindow();
             newBill.AddItem(recipientID, billNameID, amount, paymentDate);
-            refreshListView();
+            refreshView();
+        }
+
+        private void loadDateToWindow()
+        {
+            loadComboboxes();
+            loadListView();
+        }
+
+        private void loadListView()
+        {
+            collectionListView.LoadCollection();
+            listViewBills.ItemsSource = collectionListView.Collection;
+        }
+
+        private void loadComboboxes()
+        {
+            collectionRecipient.LoadCollection();
+            mainRecipient.ItemsSource = collectionRecipient.Collection;
+            collectionBillName.LoadCollection();
+            mainBillName.ItemsSource = collectionBillName.Collection;
+        }
+
+        private void loadCollection(BillsBaseDataContext dateBase)
+        {
+            collectionListView = new CollectionToView<MainView>(dateBase);
+            collectionRecipient = new CollectionToView<Recipient>(dateBase);
+            collectionBillName = new CollectionToView<BillName>(dateBase);
         }
 
         private void downloadDateFromWindow()
@@ -97,10 +102,24 @@ namespace WydatkiDomowe
             amount = decimal.Parse(mainAmount.Text);
             paymentDate = (DateTime) mainPaymentDate.SelectedDate;
         }
+        
+        private void refreshView()
+        {
+            clearView();
+            refreshListView();
+        }
 
         private void refreshListView()
         {
             collectionListView.RefreshCollection();
+        }
+
+        private void clearView()
+        {
+            mainAmount.Text = string.Empty;
+            mainBillName.Text = string.Empty;
+            mainRecipient.Text = string.Empty;
+            mainPaymentDate.SelectedDate = DateTime.Now;
         }
 
         private void windows_Closing(object sender, System.ComponentModel.CancelEventArgs e)

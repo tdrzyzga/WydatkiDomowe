@@ -41,28 +41,6 @@ namespace WydatkiDomowe
             Result = false;
         }
 
-        private void loadDateToWindow()
-        {
-            dialogBillNameGrid.DataContext = correctBillName;
-            loadListView();
-        }
-
-        private void loadListView()
-        {
-            collectionListView.LoadCollection();
-            listViewBillName.ItemsSource = collectionListView.Collection;
-        }
-
-        private void refreshListView()
-        {
-            collectionListView.RefreshCollection();
-        }
-
-        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-        }
-
         private void dialogBillNameSave_Click(object sender, RoutedEventArgs e)
         {
             if (checkCorrectData())
@@ -75,14 +53,51 @@ namespace WydatkiDomowe
                 homeBase.BillNames.InsertOnSubmit(newBillName);
                 homeBase.SubmitChanges();
 
-                refreshListView();
+                refreshView();
                 Result = true;
             }
-            
+        }
+
+        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+
+        private void loadDateToWindow()
+        {
+            dialogBillNameGrid.DataContext = correctBillName;
+            loadListView();
+        }
+
+        private void loadListView()
+        {
+            collectionListView.LoadCollection();
+            listViewBillName.ItemsSource = collectionListView.Collection;
+        }
+        
+        private void refreshView()
+        {
+            clearView();
+            refreshListView();
+        }
+        
+        private void refreshListView()
+        {
+            collectionListView.RefreshCollection();
+        }
+
+        private void clearView()
+        {
+            dialogBillName.Text = string.Empty;
+            dialogBillNamePaymentsFrequency.Text = string.Empty;
+            dialogBillNameFirstPaymentDate.SelectedDate = DateTime.Now;
         }
 
         private bool checkCorrectData()
         {
+            trimText();
+            changeHeightLetters();
             downloadDateFromWindow();
             correctBillName.CheckData(name, paymentsFrequency);
             return correctBillName.Result;
@@ -90,9 +105,22 @@ namespace WydatkiDomowe
 
         private void downloadDateFromWindow()
         {
-            name = dialogBillName.Text.Trim();
-            firstPaymentDate = (DateTime)dialogBillFirstPaymentDate.SelectedDate;
-            paymentsFrequency = dialogPaymentsFrequency.Text.Trim();
+            name = dialogBillName.Text;
+            firstPaymentDate = (DateTime)dialogBillNameFirstPaymentDate.SelectedDate;
+            paymentsFrequency = dialogBillNamePaymentsFrequency.Text;
         }
+
+        private void changeHeightLetters()
+        {
+            dialogBillName.Text = dialogBillName.Text.UppercaseFirstInWords();
+            dialogBillNamePaymentsFrequency.Text = dialogBillNamePaymentsFrequency.Text.UppercaseFirstInWords();
+        }
+
+        private void trimText()
+        {
+            dialogBillName.Text = dialogBillName.Text.Trim();
+            dialogBillNamePaymentsFrequency.Text = dialogBillNamePaymentsFrequency.Text.Trim();
+        }
+
     }
 }

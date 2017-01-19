@@ -24,6 +24,9 @@ namespace WydatkiDomowe
         public bool Result { get; private set; }
 
         private CollectionToView<RecipientView> collectionListView;
+        private CollectionToView<Street> collectionStreet;
+        private CollectionToView<PostCode> collectionPostCode;
+        private CollectionToView<City> collectionCity;
         private BillsBaseDataContext dateBase;
         private Tuple<string, object> street;
         private Tuple<string, object> city;
@@ -40,25 +43,26 @@ namespace WydatkiDomowe
             InitializeComponent();
 
             dateBase = db;
-            collectionListView = new CollectionToView<RecipientView>(db);
+
+            initializeCollection(db);
             loadDateToWindow();
 
             Result = false;        
         }
 
+        private void initializeCollection(BillsBaseDataContext db)
+        {
+            collectionListView = new CollectionToView<RecipientView>(db);
+            collectionStreet = new CollectionToView<Street>(db);
+            collectionPostCode = new CollectionToView<PostCode>(db);
+            collectionCity = new CollectionToView<City>(db);
+        }
+
         private void loadDateToWindow()
         {
-            dialogRecipientCity.ItemsSource = dateBase.Cities;
-            dialogRecipientStreet.ItemsSource = dateBase.Streets;
-            dialogRecipientPostCode.ItemsSource = dateBase.PostCodes;
+            loadComboboxes();
             dialogRecipientGrid.DataContext = correctRecipient;
             loadListView();
-        }
-        
-        private void loadListView()
-        {
-            collectionListView.LoadCollection();
-            listViewRecipient.ItemsSource = collectionListView.Collection;
         }
 
         private void dialogRecipientSave_Click(object sender, RoutedEventArgs e)
@@ -67,9 +71,61 @@ namespace WydatkiDomowe
             {
                 NewRecipient newRecipient = new NewRecipient(dateBase);
                 newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
-                refreshListView();
+                refreshView();
                 Result = true;
             }
+        }
+        
+
+        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+
+        private void loadComboboxes()
+        {
+            collectionStreet.LoadCollection();
+            dialogRecipientStreet.ItemsSource = collectionStreet.Collection;
+            collectionPostCode.LoadCollection();
+            dialogRecipientPostCode.ItemsSource = collectionPostCode.Collection;
+            collectionCity.LoadCollection();
+            dialogRecipientCity.ItemsSource = collectionCity.Collection;
+        }
+
+        private void loadListView()
+        {
+            collectionListView.LoadCollection();
+            listViewRecipient.ItemsSource = collectionListView.Collection;
+        }
+
+        private void refreshView()
+        {
+            clearView();
+            refreshListView();
+            refreshComboboxes();
+        }
+
+        private void clearView()
+        {
+            dialogRecipientName.Text = string.Empty;
+            dialogRecipientAccount.Text = string.Empty;
+            dialogRecipientStreet.Text = string.Empty;
+            dialogRecipientBuildingNr.Text = string.Empty;
+            dialogRecipientPostCode.Text = string.Empty;
+            dialogRecipientCity.Text = string.Empty;
+        }
+
+        private void refreshListView()
+        {
+            collectionListView.RefreshCollection();
+        }
+
+        private void refreshComboboxes()
+        {
+            collectionStreet.RefreshCollection();
+            collectionPostCode.RefreshCollection();
+            collectionCity.RefreshCollection();
         }
 
         private void downloadDateFromWindow()
@@ -84,23 +140,23 @@ namespace WydatkiDomowe
 
         private bool checkCorrectData()
         {
-            trimDate();
-            changeLetters();
+            trimText();
+            changeHeightLetters();
             downloadDateFromWindow();
 
             correctRecipient.CheckData(name, account, street, buildingNr, postCode, city);
             return correctRecipient.Result;
         }
 
-        private void changeLetters()
+        private void changeHeightLetters()
         {
-            dialogRecipientName.Text = dialogRecipientName.Text.UppercaseFirst();
-            dialogRecipientStreet.Text = dialogRecipientStreet.Text.UppercaseFirst();
-            dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.UppercaseFirst();
-            dialogRecipientCity.Text = dialogRecipientCity.Text.UppercaseFirst();
+            dialogRecipientName.Text = dialogRecipientName.Text.UppercaseFirstInWords();
+            dialogRecipientStreet.Text = dialogRecipientStreet.Text.UppercaseFirstInWords();
+            dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.UppercaseFirstInWords();
+            dialogRecipientCity.Text = dialogRecipientCity.Text.UppercaseFirstInWords();
         }
-        
-        private void trimDate()
+
+        private void trimText()
         {
             dialogRecipientName.Text = dialogRecipientName.Text.Trim();
             dialogRecipientAccount.Text = dialogRecipientAccount.Text.Trim();
@@ -108,16 +164,6 @@ namespace WydatkiDomowe
             dialogRecipientBuildingNr.Text = dialogRecipientBuildingNr.Text.Trim();
             dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.Trim();
             dialogRecipientCity.Text = dialogRecipientCity.Text.Trim();
-        }            
-
-        private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void refreshListView()
-        {
-            collectionListView.RefreshCollection();
-        }
+        }  
     }
 }

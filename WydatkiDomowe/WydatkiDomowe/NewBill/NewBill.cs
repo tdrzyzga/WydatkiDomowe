@@ -27,10 +27,9 @@ namespace WydatkiDomowe
             dateBase.Bills.InsertOnSubmit(newBill);
             dateBase.SubmitChanges();
 
-            ID = dateBase.Bills.Single(i => i.RecipientID == recipientID).BillsID;
+            ID = dateBase.Bills.Single(i => i == newBill).BillsID;
 
             return ID;
-        }
-
+        }        
     }
 }
