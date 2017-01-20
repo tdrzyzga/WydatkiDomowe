@@ -22,7 +22,7 @@ namespace WydatkiDomowe
     {
         public bool Result { get; private set; }
         private BillsBaseDataContext homeBase;
-        private CollectionToView<BillName> collectionListView;
+        private CollectionToView<BillName> collectionListView;        
         private string name;
         private DateTime firstPaymentDate;
         private string paymentsFrequency;
