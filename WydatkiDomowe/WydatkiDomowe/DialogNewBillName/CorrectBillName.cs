@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WydatkiDomowe
 {
-    class CorrectBillName : INotifyPropertyChanged
+    public class CorrectBillName : INotifyPropertyChanged
     {
         public bool Result { get; private set; }
         public bool IncorrectName { get; private set; }

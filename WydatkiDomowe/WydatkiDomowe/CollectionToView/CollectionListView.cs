@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace WydatkiDomowe
 {
-    class CollectionToView<T> where T: class
+    public class CollectionToView<T> where T: class
     {
         public ObservableCollection<T> Collection{get; private set;}
         private BillsBaseDataContext dateBase;

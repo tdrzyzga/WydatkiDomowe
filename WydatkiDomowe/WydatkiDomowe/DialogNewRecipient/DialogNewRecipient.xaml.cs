@@ -37,13 +37,11 @@ namespace WydatkiDomowe
         private CorrectRecipient correctRecipient;
 
         public DialogNewRecipient(BillsBaseDataContext db)
-        {
-            correctRecipient = new CorrectRecipient(db);
-
+        {          
             InitializeComponent();
 
             dateBase = db;
-
+            correctRecipient = new CorrectRecipient(db);
             initializeCollection(db);
             loadDateToWindow();
 

@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace WydatkiDomowe
 {
-    static public class EditableComboBox
+    public static class EditableComboBox
     {  
         public static int GetMaxLength(DependencyObject obj)
         {

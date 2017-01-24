@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WydatkiDomowe
 {
-    static class CorrectData
+    public static class CorrectData
     {
         static int correctAccountLength = 26;
 

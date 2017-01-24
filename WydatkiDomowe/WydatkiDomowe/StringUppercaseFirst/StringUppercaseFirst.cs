@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace WydatkiDomowe
 {
-    static class StringUppercaseFirst
+    public static class StringUppercaseFirst
     {
         
 

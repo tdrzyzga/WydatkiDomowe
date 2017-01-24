@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WydatkiDomowe
 {
-    class NewBill
+    public class NewBill
     {
         public int ID { get; private set; }
 

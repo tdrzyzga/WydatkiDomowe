@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace WydatkiDomowe
 { 
-    class NewRecipient
+    public class NewRecipient
     {
         public int ID {get; private set;}
 
