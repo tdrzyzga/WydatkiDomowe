@@ -13,8 +13,8 @@ namespace WydatkiDomowe.Tests
         [TestMethod()]
         public void containsLettersTest()
         {
-            string text = "l44";
-            bool expected = true;
+            string text = "44";
+            bool expected = false;
             bool actual;
 
             actual = CorrectData.containsLetters(text);
