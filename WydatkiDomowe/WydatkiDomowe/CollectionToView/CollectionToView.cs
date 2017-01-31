@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.Linq;
+using System.Collections;
 
 namespace WydatkiDomowe
 {
-    class CollectionToView<T> where T : class
+    public class CollectionToView<T> where T: class
     {
         public ObservableCollection<T> Collection{get; private set;}
         private BillsBaseDataContext dateBase;
@@ -29,6 +30,11 @@ namespace WydatkiDomowe
             Collection.Clear();
             foreach (var i in dateBase.GetTable<T>())
                 Collection.Add(i);
+        }
+
+        public void AddItem(T item)
+        {
+            Collection.Add(item);
         }
     }
 }

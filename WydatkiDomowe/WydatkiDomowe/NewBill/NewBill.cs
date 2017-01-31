@@ -16,13 +16,14 @@ namespace WydatkiDomowe
             dateBase = db;
         }
 
-        public int AddItem(int recipientID, int billNameID, decimal amount, DateTime paymentDate)
+        public int AddItem(int recipientID, int billNameID, decimal amount, DateTime paymentDate, DateTime requiredDate)
         {
             Bills newBill = new Bills();
             newBill.RecipientID = recipientID;
             newBill.BillNameID = billNameID;
             newBill.Amount = amount;
             newBill.PaymentDate = paymentDate;
+            newBill.RequiredDate = requiredDate;
 
             dateBase.Bills.InsertOnSubmit(newBill);
             dateBase.SubmitChanges();

@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                Title="Wydatki Domowe" MinWidth="820" MinHeight="415" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="415" Width="820" Padding="0,0,0,0" WindowStartupLocation="CenterScreen" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}" Closing="windows_Closing">
+                Title="Wydatki Domowe" MinWidth="990" MinHeight="450" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="450" Width="990" Padding="0,0,0,0" WindowStartupLocation="CenterScreen" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}" Closing="windows_Closing">
     <Grid Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -24,11 +24,12 @@
                 <ColumnDefinition Width="185" />
                 <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="185" />
                 <ColumnDefinition Width="185*" />
 
             </Grid.ColumnDefinitions>
             <Label Content="Rachunek: " HorizontalAlignment="Left" Name="label0" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
-            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" />
+            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" SelectionChanged="mainBillName_SelectionChanged" />
             <Label Content="Odbiorca: " Grid.Column="1" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
             <ComboBox x:Name="mainRecipient" DisplayMemberPath="Name" Grid.Column="1"  SelectedValuePath="RecipientID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24"/>
             <Label Content="Kwota: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="2" Margin="5,0,0,28" Grid.ColumnSpan="2" Width="42" />
@@ -36,8 +37,13 @@
 
             <Label Content="Data wpłaty: " Height="26" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Width="111" Grid.Column="3" Margin="5,0,0,0" />
             <DatePicker x:Name="mainPaymentDate" Grid.Column="3" SelectedDate="{x:Static sys:DateTime.Now}" Height="24" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="" />
-            <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Click="mainSave_Click"/>
-            <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="97,26,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" />
+
+            <Label Content="Termin zapłaty: " Height="26" HorizontalAlignment="Left" Margin="5,0,0,0" Name="label3" VerticalAlignment="Top" Width="111" Grid.Column="4" />
+            <DatePicker x:Name="mainRequiredDate"  Height="24" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="5,26,0,0" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Width="180" Grid.Column="4" IsEnabled="False" FontSize="11" FontStretch="Normal" Visibility="Visible" IsTodayHighlighted="True" />
+
+
+            <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="6,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" Click="mainSave_Click"/>
+            <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="84,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" />
         </Grid>
         <Grid Grid.Row="3">
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBills" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">

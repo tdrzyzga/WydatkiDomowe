@@ -21,11 +21,12 @@ namespace WydatkiDomowe
     public partial class MainWindow : Window
     {
         private BillsBaseDataContext dateBase { get; set; }
-        private CollectionToView<MainView> collectionListView;
+        private CollectionToView<MainView> collectionBills;
         private CollectionToView<Recipient> collectionRecipient;
         private CollectionToView<BillName> collectionBillName;
         private int recipientID;
         private DateTime paymentDate;
+        private DateTime requiredDate;
         private decimal amount;
         private int billNameID;
 
@@ -64,7 +65,7 @@ namespace WydatkiDomowe
         {
             NewBill newBill = new NewBill(dateBase);
             downloadDateFromWindow();
-            newBill.AddItem(recipientID, billNameID, amount, paymentDate);
+            newBill.AddItem(recipientID, billNameID, amount, paymentDate, requiredDate);
             refreshView();
         }
 
@@ -76,8 +77,8 @@ namespace WydatkiDomowe
 
         private void loadListView()
         {
-            collectionListView.LoadCollection();
-            listViewBills.ItemsSource = collectionListView.Collection;
+            collectionBills.LoadCollection();
+            listViewBills.ItemsSource = collectionBills.Collection;
         }
 
         private void loadComboboxes()
@@ -90,7 +91,7 @@ namespace WydatkiDomowe
 
         private void loadCollection(BillsBaseDataContext dateBase)
         {
-            collectionListView = new CollectionToView<MainView>(dateBase);
+            collectionBills = new CollectionToView<MainView>(dateBase);
             collectionRecipient = new CollectionToView<Recipient>(dateBase);
             collectionBillName = new CollectionToView<BillName>(dateBase);
         }
@@ -101,6 +102,7 @@ namespace WydatkiDomowe
             billNameID = (int)mainBillName.SelectedValue;
             amount = decimal.Parse(mainAmount.Text);
             paymentDate = (DateTime) mainPaymentDate.SelectedDate;
+            requiredDate = (DateTime)mainRequiredDate.SelectedDate;
         }
         
         private void refreshView()
@@ -111,7 +113,7 @@ namespace WydatkiDomowe
 
         private void refreshListView()
         {
-            collectionListView.RefreshCollection();
+            collectionBills.RefreshCollection();
         }
 
         private void clearView()
@@ -120,11 +122,47 @@ namespace WydatkiDomowe
             mainBillName.Text = string.Empty;
             mainRecipient.Text = string.Empty;
             mainPaymentDate.SelectedDate = DateTime.Now;
+            mainRequiredDate.SelectedDate = null;
         }
 
         private void windows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void mainBillName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (mainBillName.IsDropDownOpen)
+                setRequiredDate();
+        }
+
+        private void setRequiredDate()
+        {
+            BillName item = new BillName();
+            item = dateBase.BillNames.Single(i => i.BillNameID == (int)mainBillName.SelectedValue);
+
+            if (existInBillTable(item))
+            {
+                var items = dateBase.Bills.Where(n => n.BillNameID == item.BillNameID).OrderBy(n => n.RequiredDate);
+                mainRequiredDate.SelectedDate = setDate(item, items.AsEnumerable().Last().RequiredDate);
+            }
+            else
+                mainRequiredDate.SelectedDate = setDate(item);
+        }
+
+        private bool existInBillTable(BillName item)
+        {
+            return dateBase.Bills.Any(i => i.BillNameID == item.BillNameID);
+        }
+
+        private DateTime setDate(BillName item)
+        {
+            return item.FirstPaymentDate;
+        }
+
+        private DateTime setDate(BillName item, DateTime lastDate)
+        {
+            return lastDate.AddDays(item.PaymentsFrequency);
         }
     }
 }

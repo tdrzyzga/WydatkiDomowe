@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CollectionToView\CollectionListView.cs" />
+    <Compile Include="CollectionToView\CollectionToView.cs" />
     <Compile Include="CorrectData\CorrectData.cs" />
     <Compile Include="DialogNewBillName\CorrectBillName.cs" />
     <Compile Include="DialogNewBillName\DialogNewBillName.xaml.cs">
