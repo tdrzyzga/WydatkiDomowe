@@ -41,10 +41,19 @@ namespace WydatkiDomowe
                 return false;
         }
 
-        static public bool isString(string text)
+        static public bool isNotInt(string text)
         {
             int temp;
             if (!Int32.TryParse(text, out temp) || !(temp>= 0))
+                return true;
+            else
+                return false;
+        }
+
+        static public bool isNotDouble(string text)
+        {
+            double temp;
+            if (!Double.TryParse(text, out temp) || !(temp >= 0))
                 return true;
             else
                 return false;

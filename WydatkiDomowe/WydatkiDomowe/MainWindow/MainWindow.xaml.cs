@@ -29,10 +29,12 @@ namespace WydatkiDomowe
         private DateTime requiredDate;
         private decimal amount;
         private int billNameID;
+        private CorrectBill correctBill;
 
         public MainWindow()
         {
             dateBase = new BillsBaseDataContext();
+            correctBill = new CorrectBill();
             InitializeComponent();
 
             loadCollection(dateBase);
@@ -63,10 +65,19 @@ namespace WydatkiDomowe
 
         private void mainSave_Click(object sender, RoutedEventArgs e)
         {
-            NewBill newBill = new NewBill(dateBase);
-            downloadDateFromWindow();
-            newBill.AddItem(recipientID, billNameID, amount, paymentDate, requiredDate);
-            refreshView();
+            if (checkCorrectData())
+            {
+                NewBill newBill = new NewBill(dateBase);
+                downloadDateFromWindow();
+                newBill.AddItem(recipientID, billNameID, amount, paymentDate, requiredDate);
+                refreshView();
+            }
+        }
+
+        private bool checkCorrectData()
+        {
+            correctBill.CheckData(mainBillName, mainRecipient, mainAmount.Text);
+            return correctBill.Result;
         }
 
         private void loadDateToWindow()
@@ -83,6 +94,7 @@ namespace WydatkiDomowe
 
         private void loadComboboxes()
         {
+            mainBillsGrid.DataContext = correctBill;
             collectionRecipient.LoadCollection();
             mainRecipient.ItemsSource = collectionRecipient.Collection;
             collectionBillName.LoadCollection();

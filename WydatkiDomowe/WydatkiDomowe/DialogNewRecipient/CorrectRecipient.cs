@@ -64,8 +64,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                city.Trim();
-
                 if (CorrectData.containsNumbers(city))
                 {
                     warnings += "Nazwa miasta zawiera liczby!\n";
@@ -94,8 +92,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                postCode.Trim();
-
                 if (CorrectData.containsLetters(postCode))
                 {
                     warnings += "Kod pocztowy zawiera litery!\n";
@@ -143,8 +139,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                street.Trim();
-
                 if (CorrectData.containsNumbers(street))
                 {
                     warnings += "Nazwa ulicy zawiera liczby!\n";

@@ -79,6 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillsBase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\CorrectBill.cs" />
     <Compile Include="StringUppercaseFirst\StringUppercaseFirst.cs" />
     <Page Include="DialogNewBillName\DialogNewBillName.xaml">
       <SubType>Designer</SubType>

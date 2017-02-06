@@ -18,7 +18,7 @@
                 </MenuItem>
             </Menu>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="mainBillsGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="185" />
                 <ColumnDefinition Width="185" />
@@ -29,14 +29,44 @@
 
             </Grid.ColumnDefinitions>
             <Label Content="Rachunek: " HorizontalAlignment="Left" Name="label0" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
-            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" SelectionChanged="mainBillName_SelectionChanged" />
+            <ComboBox x:Name="mainBillName" DisplayMemberPath="Name" SelectedValuePath="BillNameID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24" SelectionChanged="mainBillName_SelectionChanged">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectBillName}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+            </ComboBox>
             <Label Content="Odbiorca: " Grid.Column="1" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" Width="180" Margin="5,0,0,0" />
-            <ComboBox x:Name="mainRecipient" DisplayMemberPath="Name" Grid.Column="1"  SelectedValuePath="RecipientID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24"/>
+            <ComboBox x:Name="mainRecipient" DisplayMemberPath="Name" Grid.Column="1"  SelectedValuePath="RecipientID" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" MinWidth="128" VerticalAlignment="Top" Width="180" Height="24">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectRecipient}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+            </ComboBox>
             <Label Content="Kwota: " HorizontalAlignment="Left" Name="label4" MinWidth="42" Grid.Column="2" Margin="5,0,0,28" Grid.ColumnSpan="2" Width="42" />
-            <TextBox x:Name="mainAmount" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" VerticalAlignment="Top" Width="65" Grid.Column="2" Height="24" RenderTransformOrigin="0.455,0.792" />
+            <TextBox x:Name="mainAmount" HorizontalAlignment="Left" Margin="5,26,0,0" MinHeight="24" VerticalAlignment="Top" Width="65" Grid.Column="2" Height="24" RenderTransformOrigin="0.455,0.792" >
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IncorrectAmount}" Value="True">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
 
             <Label Content="Data wpłaty: " Height="26" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" Width="111" Grid.Column="3" Margin="5,0,0,0" />
-            <DatePicker x:Name="mainPaymentDate" Grid.Column="3" SelectedDate="{x:Static sys:DateTime.Now}" Height="24" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="" />
+            <DatePicker x:Name="mainPaymentDate" Grid.Column="3" SelectedDate="{x:Static sys:DateTime.Now}" Height="24" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Width="180" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="" SelectedDateFormat="Short" />
 
             <Label Content="Termin zapłaty: " Height="26" HorizontalAlignment="Left" Margin="5,0,0,0" Name="label3" VerticalAlignment="Top" Width="111" Grid.Column="4" />
             <DatePicker x:Name="mainRequiredDate"  Height="24" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="5,26,0,0" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Width="180" Grid.Column="4" IsEnabled="False" FontSize="11" FontStretch="Normal" Visibility="Visible" IsTodayHighlighted="True" />

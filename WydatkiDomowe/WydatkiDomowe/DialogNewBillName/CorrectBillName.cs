@@ -55,7 +55,7 @@ namespace WydatkiDomowe
             }
             else
             {
-                if (CorrectData.isString(paymentsFrequency))
+                if (CorrectData.isNotInt(paymentsFrequency))
                 {
                     warnings += "Częstotliwość kolejnych wpłat nie jest liczbą całkowitą dodatnią!\n";
                     IncorrectPaymentsFrequency = true;
@@ -88,8 +88,6 @@ namespace WydatkiDomowe
             }
             else
             {
-                name = name.Trim();
-
                 if (existInDatebase(name))
                 {
                     warnings += "Podana nazwa odbiorcy isnieje już w bazie danych!\n";
