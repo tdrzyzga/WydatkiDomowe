@@ -32,6 +32,7 @@ namespace WydatkiDomowe
         private CorrectBill correctBill;
         private bool update;
         private int updatedBillID;
+        private StackPanel innerStack;
 
         public MainWindow()
         {
@@ -99,6 +100,7 @@ namespace WydatkiDomowe
         private void loadDateToWindow()
         {
             loadComboboxes();
+            loadCheckBoxes();
             loadListView();
         }
 
@@ -122,6 +124,26 @@ namespace WydatkiDomowe
             collectionBills = new CollectionToView<MainView>(dateBase);
             collectionRecipient = new CollectionToView<Recipient>(dateBase);
             collectionBillName = new CollectionToView<BillName>(dateBase);
+        }
+
+        private void loadCheckBoxes()
+        {
+            innerStack = new StackPanel { Orientation = Orientation.Horizontal };
+            innerStack.HorizontalAlignment = HorizontalAlignment.Stretch;
+            innerStack.VerticalAlignment = VerticalAlignment.Stretch;
+
+            foreach (var c in dateBase.BillNames)
+            {
+                CheckBox cb = new CheckBox();
+                cb.HorizontalAlignment = HorizontalAlignment.Left;
+                cb.VerticalAlignment = VerticalAlignment.Center;
+                cb.Margin = new Thickness(5, 0, 0, 0);
+
+                cb.Content = c.Name;
+                innerStack.Children.Add(cb);
+            }
+
+            mainCheckBoxGrid.Children.Add(innerStack);
         }
 
         private void downloadDateFromWindow()

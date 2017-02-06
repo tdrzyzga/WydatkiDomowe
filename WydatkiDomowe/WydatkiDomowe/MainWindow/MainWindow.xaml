@@ -7,7 +7,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="53" />
-            <RowDefinition Height="53" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="168*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -74,6 +74,9 @@
 
             <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="6,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" Click="mainSave_Click"/>
             <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="84,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" />
+        </Grid>
+        <Grid Grid.Row="2" x:Name="mainCheckBoxGrid">
+
         </Grid>
         <Grid Grid.Row="3">
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBills" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="listViewBills_MouseDoubleClick">

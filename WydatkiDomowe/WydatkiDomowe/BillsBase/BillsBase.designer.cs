@@ -146,7 +146,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.RecipientView")]
-	public partial class RecipientView
+	public partial class RecipientView: INameInterface
 	{
 		
 		private string _Name;
@@ -755,7 +755,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.Recipient")]
-	public partial class Recipient : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Recipient : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1325,7 +1325,7 @@ namespace WydatkiDomowe
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.BillName")]
-	public partial class BillName : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class BillName : INotifyPropertyChanging, INotifyPropertyChanged, INameInterface
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);

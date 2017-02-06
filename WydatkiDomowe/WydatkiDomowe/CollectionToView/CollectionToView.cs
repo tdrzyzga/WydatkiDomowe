@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace WydatkiDomowe
 {
-    public class CollectionToView<T> where T: class
+    public class CollectionToView<T> where T :  class
     {
         public ObservableCollection<T> Collection{get; private set;}
         private BillsBaseDataContext dateBase;
@@ -23,6 +23,7 @@ namespace WydatkiDomowe
         {
             foreach (var i in dateBase.GetTable<T>())
                 Collection.Add(i);
+            //Collection.OrderBy(i => i.Name);
         }
 
         public void RefreshCollection()
@@ -30,11 +31,7 @@ namespace WydatkiDomowe
             Collection.Clear();
             foreach (var i in dateBase.GetTable<T>())
                 Collection.Add(i);
-        }
-
-        public void AddItem(T item)
-        {
-            Collection.Add(item);
+            //Collection.OrderBy(i => i.Name);
         }
     }
 }
