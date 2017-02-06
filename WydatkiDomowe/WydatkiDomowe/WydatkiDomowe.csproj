@@ -113,8 +113,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewBill\NewBill.cs" />
-    <Compile Include="NewRecipient\NewRecipient.cs" />
+    <Compile Include="NewOrUpdateBill\NewOrUpdateBill.cs" />
+    <Compile Include="NewOrUpdateRecipient\NewOrUpdateRecipient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

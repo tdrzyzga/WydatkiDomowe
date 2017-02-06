@@ -27,6 +27,8 @@ namespace WydatkiDomowe
         private DateTime firstPaymentDate;
         private string paymentsFrequency;
         private CorrectBillName correctBillName;
+        private bool update;
+        private int updatedBillNameID;
 
         public DialogNewBillName(BillsBaseDataContext db)
         {
@@ -38,6 +40,7 @@ namespace WydatkiDomowe
             collectionListView = new CollectionToView<BillName>(db);
 
             loadDateToWindow();
+            update = false;
             Result = false;
         }
 
@@ -45,17 +48,38 @@ namespace WydatkiDomowe
         {
             if (checkCorrectData())
             {
-                BillName newBillName = new BillName();
-                newBillName.Name = name;
-                newBillName.FirstPaymentDate = firstPaymentDate;
-                newBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
-
-                homeBase.BillNames.InsertOnSubmit(newBillName);
-                homeBase.SubmitChanges();
+                if (update)
+                {
+                    updateBillNameItem();
+                    update = false;
+                }
+                else
+                    addBillNameItem();
 
                 refreshView();
                 Result = true;
             }
+        }
+
+        private void updateBillNameItem()
+        {
+            BillName updateBillName = homeBase.BillNames.Single(i => i.BillNameID == updatedBillNameID);
+            updateBillName.Name = name;
+            updateBillName.FirstPaymentDate = firstPaymentDate;
+            updateBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
+
+            homeBase.SubmitChanges();
+        }
+
+        private void addBillNameItem()
+        {
+            BillName newBillName = new BillName();
+            newBillName.Name = name;
+            newBillName.FirstPaymentDate = firstPaymentDate;
+            newBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
+
+            homeBase.BillNames.InsertOnSubmit(newBillName);
+            homeBase.SubmitChanges();
         }
 
         private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
@@ -120,6 +144,21 @@ namespace WydatkiDomowe
         {
             dialogBillName.Text = dialogBillName.Text.Trim();
             dialogBillNamePaymentsFrequency.Text = dialogBillNamePaymentsFrequency.Text.Trim();
+        }
+
+        private void listViewBillName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BillName billName = new BillName();
+            ListView listView = sender as ListView;
+
+            billName = listView.SelectedItems[0] as BillName;
+
+            dialogBillName.Text = billName.Name;
+            dialogBillNamePaymentsFrequency.Text = billName.PaymentsFrequency.ToString();
+            dialogBillNameFirstPaymentDate.SelectedDate = billName.FirstPaymentDate.Date;
+
+            update = true;
+            updatedBillNameID = homeBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
         }
 
     }

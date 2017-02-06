@@ -30,6 +30,8 @@ namespace WydatkiDomowe
         private decimal amount;
         private int billNameID;
         private CorrectBill correctBill;
+        private bool update;
+        private int updatedBillID;
 
         public MainWindow()
         {
@@ -39,6 +41,7 @@ namespace WydatkiDomowe
 
             loadCollection(dateBase);
             loadDateToWindow();
+            update = false;
         }
         
         private void newRecipient_Click(object sender, RoutedEventArgs e)
@@ -47,7 +50,10 @@ namespace WydatkiDomowe
             newRecipient.ShowDialog();
 
             if (newRecipient.Result)
+            {
                 collectionRecipient.RefreshCollection();
+                refreshListView();
+            }
 
             newRecipient.Close();
         }
@@ -58,7 +64,10 @@ namespace WydatkiDomowe
             newBillName.ShowDialog();
 
             if (newBillName.Result)
+            {
                 collectionBillName.RefreshCollection();
+                refreshListView();
+            }
 
             newBillName.Close();
         }
@@ -67,9 +76,16 @@ namespace WydatkiDomowe
         {
             if (checkCorrectData())
             {
-                NewBill newBill = new NewBill(dateBase);
+                NewOrUpdateBill newOrUpdateBill = new NewOrUpdateBill(dateBase);
                 downloadDateFromWindow();
-                newBill.AddItem(recipientID, billNameID, amount, paymentDate, requiredDate);
+                if (update)
+                {
+                    newOrUpdateBill.UpdateItem(updatedBillID, recipientID, billNameID, amount, paymentDate, requiredDate);
+                    update = false;
+                }
+                else
+                    newOrUpdateBill.AddItem(recipientID, billNameID, amount, paymentDate, requiredDate);
+                
                 refreshView();
             }
         }
@@ -175,6 +191,25 @@ namespace WydatkiDomowe
         private DateTime setDate(BillName item, DateTime lastDate)
         {
             return lastDate.AddDays(item.PaymentsFrequency);
+        }
+
+        private void listViewBills_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MainView mainView = new MainView();
+            ListView listView = sender as ListView;
+
+            mainView = listView.SelectedItems[0] as MainView;
+
+            mainBillName.Text = mainView.Bill;
+            mainRecipient.Text = mainView.Recipient;
+            mainAmount.Text = mainView.Amount.ToString();
+            mainPaymentDate.SelectedDate = mainView.PaymentDate.Date;
+            mainRequiredDate.SelectedDate = mainView.RequiredDate.Date;
+
+            update = true;
+
+            int id = dateBase.BillNames.Single(i => i.Name == mainView.Bill).BillNameID;
+            updatedBillID = dateBase.Bills.Single(i => (i.BillNameID == id && i.PaymentDate == mainView.PaymentDate)).BillsID;
         }
     }
 }

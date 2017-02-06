@@ -35,6 +35,8 @@ namespace WydatkiDomowe
         private string account;
         private string buildingNr;
         private CorrectRecipient correctRecipient;
+        private bool update;
+        private int updatedRecipientID;
 
         public DialogNewRecipient(BillsBaseDataContext db)
         {          
@@ -44,7 +46,7 @@ namespace WydatkiDomowe
             correctRecipient = new CorrectRecipient(db);
             initializeCollection(db);
             loadDateToWindow();
-
+            update = false;
             Result = false;        
         }
 
@@ -67,8 +69,17 @@ namespace WydatkiDomowe
         {
             if (checkCorrectData())
             {
-                NewRecipient newRecipient = new NewRecipient(dateBase);
-                newRecipient.AddItem(name, account, street, buildingNr, postCode, city);
+                NewOrUpdateRecipient newOrUpdateRecipient = new NewOrUpdateRecipient(dateBase);
+
+                if (update)
+                {
+                    newOrUpdateRecipient.UpdateItem(updatedRecipientID, name, account, street, buildingNr, postCode, city);
+                    update = false;
+                }
+                else
+                {                    
+                    newOrUpdateRecipient.AddItem(name, account, street, buildingNr, postCode, city);
+                }
                 refreshView();
                 Result = true;
             }
@@ -162,6 +173,24 @@ namespace WydatkiDomowe
             dialogRecipientBuildingNr.Text = dialogRecipientBuildingNr.Text.Trim();
             dialogRecipientPostCode.Text = dialogRecipientPostCode.Text.Trim();
             dialogRecipientCity.Text = dialogRecipientCity.Text.Trim();
-        }  
+        }
+
+        private void listViewRecipient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RecipientView recipientView = new RecipientView();
+            ListView listView = sender as ListView;
+
+            recipientView = listView.SelectedItems[0] as RecipientView;
+
+            dialogRecipientName.Text = recipientView.Name;
+            dialogRecipientAccount.Text = recipientView.Account;
+            dialogRecipientStreet.Text = recipientView.Street;
+            dialogRecipientBuildingNr.Text =recipientView.BuildingNR;
+            dialogRecipientPostCode.Text = recipientView.PostCode;
+            dialogRecipientCity.Text = recipientView.City;
+
+            update = true;
+            updatedRecipientID = dateBase.Recipients.Single(i => i.Name == recipientView.Name).RecipientID;
+        }
     }
 }
