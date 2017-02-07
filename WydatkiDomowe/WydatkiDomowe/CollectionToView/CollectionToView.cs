@@ -5,33 +5,41 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Collections;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace WydatkiDomowe
 {
     public class CollectionToView<T> where T :  class
     {
-        public ObservableCollection<T> Collection{get; private set;}
+        public CollectionView Collection { get; private set; }
+
+        private ObservableCollection<T> collection;
         private BillsBaseDataContext dateBase;
 
         public CollectionToView(BillsBaseDataContext db)
-        {
-            Collection = new ObservableCollection<T>();
+        {            
             dateBase = db;
+
+            collection = new ObservableCollection<T>();
+            Collection = new CollectionView(collection);
+            Collection = (CollectionView)CollectionViewSource.GetDefaultView(collection);
+            Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
         }
 
         public void LoadCollection()
         {
             foreach (var i in dateBase.GetTable<T>())
-                Collection.Add(i);
-            //Collection.OrderBy(i => i.Name);
+                collection.Add(i);
+            Collection.Refresh();
         }
 
         public void RefreshCollection()
         {
-            Collection.Clear();
+            collection.Clear();
             foreach (var i in dateBase.GetTable<T>())
-                Collection.Add(i);
-            //Collection.OrderBy(i => i.Name);
+                collection.Add(i);
+            Collection.Refresh();
         }
     }
 }

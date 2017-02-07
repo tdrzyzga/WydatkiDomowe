@@ -21,7 +21,7 @@ namespace WydatkiDomowe
     public partial class MainWindow : Window
     {
         private BillsBaseDataContext dateBase { get; set; }
-        private CollectionToView<MainView> collectionBills;
+        private CollectionMainView collectionBills;
         private CollectionToView<Recipient> collectionRecipient;
         private CollectionToView<BillName> collectionBillName;
         private int recipientID;
@@ -33,6 +33,7 @@ namespace WydatkiDomowe
         private bool update;
         private int updatedBillID;
         private StackPanel innerStack;
+        private CheckBox checkBoxAll;
 
         public MainWindow()
         {
@@ -100,13 +101,12 @@ namespace WydatkiDomowe
         private void loadDateToWindow()
         {
             loadComboboxes();
-            loadCheckBoxes();
+            createCheckBoxes();
             loadListView();
         }
 
         private void loadListView()
         {
-            collectionBills.LoadCollection();
             listViewBills.ItemsSource = collectionBills.Collection;
         }
 
@@ -121,16 +121,18 @@ namespace WydatkiDomowe
 
         private void loadCollection(BillsBaseDataContext dateBase)
         {
-            collectionBills = new CollectionToView<MainView>(dateBase);
+            collectionBills = new CollectionMainView(dateBase);
             collectionRecipient = new CollectionToView<Recipient>(dateBase);
             collectionBillName = new CollectionToView<BillName>(dateBase);
         }
 
-        private void loadCheckBoxes()
+        private void createCheckBoxes()
         {
             innerStack = new StackPanel { Orientation = Orientation.Horizontal };
             innerStack.HorizontalAlignment = HorizontalAlignment.Stretch;
             innerStack.VerticalAlignment = VerticalAlignment.Stretch;
+
+            createCheckBoxAll();  
 
             foreach (var c in dateBase.BillNames)
             {
@@ -138,12 +140,28 @@ namespace WydatkiDomowe
                 cb.HorizontalAlignment = HorizontalAlignment.Left;
                 cb.VerticalAlignment = VerticalAlignment.Center;
                 cb.Margin = new Thickness(5, 0, 0, 0);
+                cb.Checked += checkBox_Checked;
+                cb.Unchecked += checkBox_Checked;
+                cb.IsChecked = true;
 
                 cb.Content = c.Name;
                 innerStack.Children.Add(cb);
             }
 
             mainCheckBoxGrid.Children.Add(innerStack);
+        }
+
+        private void createCheckBoxAll()
+        {
+            checkBoxAll = new CheckBox();
+            checkBoxAll.HorizontalAlignment = HorizontalAlignment.Left;
+            checkBoxAll.VerticalAlignment = VerticalAlignment.Center;
+            checkBoxAll.Margin = new Thickness(5, 0, 0, 0);
+            checkBoxAll.Checked += checkBoxAll_Checked;
+            checkBoxAll.IsChecked = true;
+
+            checkBoxAll.Content = "Wszystkie";
+            innerStack.Children.Add(checkBoxAll);
         }
 
         private void downloadDateFromWindow()
@@ -232,6 +250,38 @@ namespace WydatkiDomowe
 
             int id = dateBase.BillNames.Single(i => i.Name == mainView.Bill).BillNameID;
             updatedBillID = dateBase.Bills.Single(i => (i.BillNameID == id && i.PaymentDate == mainView.PaymentDate)).BillsID;
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {            
+            IEnumerable<CheckBox> selectedBoxes = this.innerStack.Children.OfType<CheckBox>()
+                                                    .Where(cb => cb.IsChecked == true);
+
+            setCheckBoxAll();
+            
+            IEnumerable<string> bills = selectedBoxes.Select(i => i.Content.ToString());
+            collectionBills.Show(bills);
+        }
+
+        private void setCheckBoxAll()
+        {
+            IEnumerable<CheckBox> selectedBoxes = this.innerStack.Children.OfType<CheckBox>()
+                                        .Select(cb => cb);
+            if (selectedBoxes.Any(cb => cb.IsChecked == false))
+                checkBoxAll.IsChecked = false;
+            else
+                checkBoxAll.IsChecked = true;
+        }
+
+        private void checkBoxAll_Checked(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<CheckBox> checkBoxes = this.innerStack.Children.OfType<CheckBox>()
+                                                    .Select(cb => cb);
+
+            foreach (var i in checkBoxes)
+                i.IsChecked = true;
+
+            checkBoxAll.IsChecked = true;
         }
     }
 }
