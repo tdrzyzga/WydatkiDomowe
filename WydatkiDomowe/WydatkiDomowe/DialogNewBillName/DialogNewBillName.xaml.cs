@@ -123,7 +123,7 @@ namespace WydatkiDomowe
             trimText();
             changeHeightLetters();
             downloadDateFromWindow();
-            correctBillName.CheckData(name, paymentsFrequency);
+            correctBillName.CheckData(update, name, paymentsFrequency);
             return correctBillName.Result;
         }
 

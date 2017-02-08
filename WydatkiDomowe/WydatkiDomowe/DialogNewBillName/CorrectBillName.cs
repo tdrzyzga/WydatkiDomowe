@@ -15,6 +15,7 @@ namespace WydatkiDomowe
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private BillsBaseDataContext dateBase;
+        private bool update;
 
         public CorrectBillName(BillsBaseDataContext db)
         {
@@ -22,9 +23,10 @@ namespace WydatkiDomowe
             resetField();
         }
 
-        public void CheckData(string name, string paymentsFrequency)
+        public void CheckData(bool up, string name, string paymentsFrequency)
         {
             resetField();
+            update = up;
 
             string warnings = "";
 
@@ -88,7 +90,7 @@ namespace WydatkiDomowe
             }
             else
             {
-                if (existInDatebase(name))
+                if (existInDatebase(name) && !update)
                 {
                     warnings += "Podana nazwa odbiorcy isnieje już w bazie danych!\n";
                     IncorrectName = true;
@@ -108,6 +110,7 @@ namespace WydatkiDomowe
         {
             Result = true;
             IncorrectName = false;
+            IncorrectPaymentsFrequency = false;
         }
 
         protected void OnPropertyChanged(string propertyName)

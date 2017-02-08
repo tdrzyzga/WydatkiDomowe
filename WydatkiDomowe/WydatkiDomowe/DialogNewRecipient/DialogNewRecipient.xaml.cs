@@ -153,7 +153,7 @@ namespace WydatkiDomowe
             changeHeightLetters();
             downloadDateFromWindow();
 
-            correctRecipient.CheckData(name, account, street, buildingNr, postCode, city);
+            correctRecipient.CheckData(update, name, account, street, buildingNr, postCode, city);
             return correctRecipient.Result;
         }
 
