@@ -48,7 +48,7 @@ namespace WydatkiDomowe
         
         private void newRecipient_Click(object sender, RoutedEventArgs e)
         {
-            DialogNewRecipient newRecipient = new DialogNewRecipient(dateBase);
+            DialogNewOrUpdateRecipient newRecipient = new DialogNewOrUpdateRecipient(dateBase);
             newRecipient.ShowDialog();
 
             if (newRecipient.Result)
@@ -62,7 +62,7 @@ namespace WydatkiDomowe
 
         private void newBillName_Click(object sender, RoutedEventArgs e)
         {
-            DialogNewBillName newBillName = new DialogNewBillName(dateBase);
+            DialogNewOrUpdateBillName newBillName = new DialogNewOrUpdateBillName(dateBase);
             newBillName.ShowDialog();
 
             if (newBillName.Result)
@@ -107,6 +107,7 @@ namespace WydatkiDomowe
 
         private void loadListView()
         {
+            collectionBills.LoadCollection();
             listViewBills.ItemsSource = collectionBills.Collection;
         }
 
@@ -140,10 +141,9 @@ namespace WydatkiDomowe
                 cb.HorizontalAlignment = HorizontalAlignment.Left;
                 cb.VerticalAlignment = VerticalAlignment.Center;
                 cb.Margin = new Thickness(5, 0, 0, 0);
+                cb.IsChecked = true;
                 cb.Checked += checkBox_Checked;
                 cb.Unchecked += checkBox_Checked;
-                cb.IsChecked = true;
-
                 cb.Content = c.Name;
                 innerStack.Children.Add(cb);
             }
@@ -157,9 +157,8 @@ namespace WydatkiDomowe
             checkBoxAll.HorizontalAlignment = HorizontalAlignment.Left;
             checkBoxAll.VerticalAlignment = VerticalAlignment.Center;
             checkBoxAll.Margin = new Thickness(5, 0, 0, 0);
-            checkBoxAll.Checked += checkBoxAll_Checked;
             checkBoxAll.IsChecked = true;
-
+            checkBoxAll.Checked += checkBoxAll_Checked;            
             checkBoxAll.Content = "Wszystkie";
             innerStack.Children.Add(checkBoxAll);
         }

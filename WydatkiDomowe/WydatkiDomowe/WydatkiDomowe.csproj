@@ -82,11 +82,11 @@
     <Compile Include="CollectionMainView\CollectionMainView.cs" />
     <Compile Include="MainWindow\CorrectBill.cs" />
     <Compile Include="StringUppercaseFirst\StringUppercaseFirst.cs" />
-    <Page Include="DialogNewBillName\DialogNewBillName.xaml">
+    <Page Include="DialogNewOrUpdateBillName\DialogNewBillOrUpdateName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DialogNewRecipient\DialogNewRecipient.xaml">
+    <Page Include="DialogNewOrUpdateRecipient\DialogNewOrUpdateRecipient.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -100,12 +100,12 @@
     </Compile>
     <Compile Include="CollectionToView\CollectionToView.cs" />
     <Compile Include="CorrectData\CorrectData.cs" />
-    <Compile Include="DialogNewBillName\CorrectBillName.cs" />
-    <Compile Include="DialogNewBillName\DialogNewBillName.xaml.cs">
-      <DependentUpon>DialogNewBillName.xaml</DependentUpon>
+    <Compile Include="DialogNewOrUpdateBillName\CorrectBillName.cs" />
+    <Compile Include="DialogNewOrUpdateBillName\DialogNewBillOrUpdateName.xaml.cs">
+      <DependentUpon>DialogNewBillOrUpdateName.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DialogNewRecipient\CorrectRecipient.cs" />
-    <Compile Include="DialogNewRecipient\DialogNewRecipient.xaml.cs" />
+    <Compile Include="DialogNewOrUpdateRecipient\CorrectRecipient.cs" />
+    <Compile Include="DialogNewOrUpdateRecipient\DialogNewOrUpdateRecipient.xaml.cs" />
     <Compile Include="EditableComboBox\EditableComboBox.cs" />
     <Compile Include="INameInterface\INameInterface.cs" />
     <Compile Include="MainWindow\MainWindow.xaml.cs">

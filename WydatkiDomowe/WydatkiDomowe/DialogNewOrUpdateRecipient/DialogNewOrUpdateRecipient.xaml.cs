@@ -19,7 +19,7 @@ namespace WydatkiDomowe
     /// <summary>
     /// Interaction logic for DialogNewRecipient.xaml
     /// </summary>
-    public partial class DialogNewRecipient : Window
+    public partial class DialogNewOrUpdateRecipient : Window
     {
         public bool Result { get; private set; }
 
@@ -38,7 +38,7 @@ namespace WydatkiDomowe
         private bool update;
         private int updatedRecipientID;
 
-        public DialogNewRecipient(BillsBaseDataContext db)
+        public DialogNewOrUpdateRecipient(BillsBaseDataContext db)
         {          
             InitializeComponent();
 

@@ -18,7 +18,7 @@ namespace WydatkiDomowe
     /// <summary>
     /// Interaction logic for DialogNewBillName.xaml
     /// </summary>
-    public partial class DialogNewBillName : Window
+    public partial class DialogNewOrUpdateBillName : Window
     {
         public bool Result { get; private set; }
         private BillsBaseDataContext homeBase;
@@ -30,7 +30,7 @@ namespace WydatkiDomowe
         private bool update;
         private int updatedBillNameID;
 
-        public DialogNewBillName(BillsBaseDataContext db)
+        public DialogNewOrUpdateBillName(BillsBaseDataContext db)
         {
             correctBillName = new CorrectBillName(db);
 

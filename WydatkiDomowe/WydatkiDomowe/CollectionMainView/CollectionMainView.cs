@@ -23,9 +23,16 @@ namespace WydatkiDomowe
             collection = new ObservableCollection<MainView>();
             Collection = new CollectionView(collection);
             Collection = (CollectionView)CollectionViewSource.GetDefaultView(collection);
-            Collection.SortDescriptions.Add(new SortDescription("PaymentDate", ListSortDirection.Ascending ));
+            Collection.SortDescriptions.Add(new SortDescription("PaymentDate", ListSortDirection.Descending ));
+            Collection.SortDescriptions.Add(new SortDescription("Bill", ListSortDirection.Ascending));
         }
 
+        public void LoadCollection()
+        {
+            foreach (var i in dateBase.MainViews)
+                collection.Add(i);
+            Collection.Refresh();
+        }
 
         public void RefreshCollection()
         {
