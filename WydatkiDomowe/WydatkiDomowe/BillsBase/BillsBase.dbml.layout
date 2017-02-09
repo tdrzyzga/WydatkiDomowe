@@ -38,7 +38,7 @@
         <elementListCompartment Id="6dffe21f-4a65-400d-acd2-c3bbf7dc4dfd" absoluteBounds="0.765, 6.085, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 1.92307657877604); (3.5 : 1.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 1.92307657877604); (3.04166666666667 : 1.92307657877604 : JumpStart); (3.20833333333333 : 1.92307657877604 : JumpEnd); (3.5 : 1.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BillsBaseDataContext/City/City_Recipient" />
       <nodes>
         <classShapeMoniker Id="c144830c-1736-4b01-8ce4-385f2f6ad788" />

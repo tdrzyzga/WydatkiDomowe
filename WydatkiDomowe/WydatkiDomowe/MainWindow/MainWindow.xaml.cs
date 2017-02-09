@@ -54,6 +54,7 @@ namespace WydatkiDomowe
             if (newRecipient.Result)
             {
                 collectionRecipient.RefreshCollection();
+                reloadCheckBoxes();
                 refreshListView();
             }
 
@@ -68,6 +69,7 @@ namespace WydatkiDomowe
             if (newBillName.Result)
             {
                 collectionBillName.RefreshCollection();
+                reloadCheckBoxes();
                 refreshListView();
             }
 
@@ -125,6 +127,11 @@ namespace WydatkiDomowe
             collectionBills = new CollectionMainView(dateBase);
             collectionRecipient = new CollectionToView<Recipient>(dateBase);
             collectionBillName = new CollectionToView<BillName>(dateBase);
+        }
+
+        private void reloadCheckBoxes()
+        {
+            createCheckBoxes();
         }
 
         private void createCheckBoxes()
@@ -241,7 +248,7 @@ namespace WydatkiDomowe
 
             mainBillName.Text = mainView.Bill;
             mainRecipient.Text = mainView.Recipient;
-            mainAmount.Text = mainView.Amount.ToString();
+            mainAmount.Text = mainView.Amount.ToString("F");
             mainPaymentDate.SelectedDate = mainView.PaymentDate.Date;
             mainRequiredDate.SelectedDate = mainView.RequiredDate.Date;
 

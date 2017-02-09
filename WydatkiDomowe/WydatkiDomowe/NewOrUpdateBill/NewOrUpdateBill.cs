@@ -22,13 +22,13 @@ namespace WydatkiDomowe
             updateBill.RecipientID = recipientID;
             updateBill.BillNameID = billNameID;
             updateBill.Amount = amount;
-            updateBill.PaymentDate = paymentDate;
+            updateBill.PaymentDate = getDateWithTime(paymentDate.Date);
             updateBill.RequiredDate = requiredDate;
 
             dateBase.SubmitChanges();
 
             ID = id;
-        }  
+        }
 
         public void AddItem(int recipientID, int billNameID, decimal amount, DateTime paymentDate, DateTime requiredDate)
         {
@@ -36,13 +36,20 @@ namespace WydatkiDomowe
             newBill.RecipientID = recipientID;
             newBill.BillNameID = billNameID;
             newBill.Amount = amount;
-            newBill.PaymentDate = paymentDate;
+            newBill.PaymentDate = getDateWithTime(paymentDate.Date);
             newBill.RequiredDate = requiredDate;
 
             dateBase.Bills.InsertOnSubmit(newBill);
             dateBase.SubmitChanges();
 
             ID = dateBase.Bills.Single(i => i == newBill).BillsID;
-        }        
+        }
+
+        private DateTime getDateWithTime(DateTime dateTime)
+        {
+            DateTime dateWithTime = dateTime.Add(DateTime.Now.TimeOfDay);
+            return dateWithTime;
+        }  
+
     }
 }
