@@ -54,7 +54,7 @@ namespace WydatkiDomowe
             if (newRecipient.Result)
             {
                 collectionRecipient.RefreshCollection();
-                reloadCheckBoxes();
+                refreshCheckBoxes();
                 refreshListView();
             }
 
@@ -69,7 +69,7 @@ namespace WydatkiDomowe
             if (newBillName.Result)
             {
                 collectionBillName.RefreshCollection();
-                reloadCheckBoxes();
+                refreshCheckBoxes();
                 refreshListView();
             }
 
@@ -129,7 +129,7 @@ namespace WydatkiDomowe
             collectionBillName = new CollectionToView<BillName>(dateBase);
         }
 
-        private void reloadCheckBoxes()
+        private void refreshCheckBoxes()
         {
             createCheckBoxes();
         }
@@ -139,6 +139,7 @@ namespace WydatkiDomowe
             innerStack = new StackPanel { Orientation = Orientation.Horizontal };
             innerStack.HorizontalAlignment = HorizontalAlignment.Stretch;
             innerStack.VerticalAlignment = VerticalAlignment.Stretch;
+            innerStack.Margin = new Thickness(2, 0, 0, 0);
 
             createCheckBoxAll();  
 
@@ -288,6 +289,17 @@ namespace WydatkiDomowe
                 i.IsChecked = true;
 
             checkBoxAll.IsChecked = true;
+        }
+
+        private void mainDateRange_Click(object sender, RoutedEventArgs e)
+        {
+            collectionBills.Search((DateTime)mainDateStart.SelectedDate, (DateTime)mainDateEnd.SelectedDate);
+            
+        }
+
+        private void mainCancel_Click(object sender, RoutedEventArgs e)
+        {
+            clearView();
         }
     }
 }

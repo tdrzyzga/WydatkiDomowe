@@ -15,6 +15,8 @@ namespace WydatkiDomowe
 
         private ObservableCollection<MainView> collection;
         private BillsBaseDataContext dateBase;
+        private DateTime dateStart;
+        private DateTime dateEnd;
 
         public CollectionMainView(BillsBaseDataContext db)
         {
@@ -25,6 +27,7 @@ namespace WydatkiDomowe
             Collection = (CollectionView)CollectionViewSource.GetDefaultView(collection);
             Collection.SortDescriptions.Add(new SortDescription("PaymentDate", ListSortDirection.Descending ));
             Collection.SortDescriptions.Add(new SortDescription("Bill", ListSortDirection.Ascending));
+            Collection.Filter = filterByDateRange;
         }
 
         public void LoadCollection()
@@ -52,5 +55,27 @@ namespace WydatkiDomowe
                 collection.Add(i);
             Collection.Refresh();
         }
+
+        public void Search(DateTime start, DateTime end)
+        {
+            dateStart = start;
+            dateEnd = end;
+            Collection.Refresh();
+        }
+
+        private bool filterByDateRange(object item)
+        {
+            MainView bill = item as MainView;
+
+            return isInDateRange(bill.PaymentDate);
+        }
+
+        private bool isInDateRange(DateTime date)
+        {
+            if (date <= dateStart && date >= dateEnd)
+                return false;
+            else
+                return true;
+        }        
     }    
 }

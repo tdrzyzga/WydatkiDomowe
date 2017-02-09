@@ -8,6 +8,7 @@
             <RowDefinition Height="25" />
             <RowDefinition Height="53" />
             <RowDefinition Height="25" />
+            <RowDefinition Height="53" />
             <RowDefinition Height="168*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -73,10 +74,22 @@
 
 
             <Button x:Name="mainSave" Content="Zapisz" Height="23" HorizontalAlignment="Left" Margin="6,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" Click="mainSave_Click"/>
-            <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="84,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" />
+            <Button x:Name="mainCancel" Content="Anuluj" Height="23" HorizontalAlignment="Left" Margin="84,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="5" Click="mainCancel_Click" />
         </Grid>
         <Grid Grid.Row="2" x:Name="mainCheckBoxGrid"></Grid>
         <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="185" />
+                <ColumnDefinition Width="90*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Początek: " Height="26" HorizontalAlignment="Left" Margin="6,0,0,0" Name="label5" VerticalAlignment="Top" Width="111" />
+            <DatePicker x:Name="mainDateStart" Grid.ColumnSpan="2" SelectedDate="{x:Static sys:DateTime.Now}" Height="24" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="6,26,0,0"  VerticalAlignment="Top" VerticalContentAlignment="Stretch" Width="180" />
+            <Label Content="Koniec: " Grid.Column="1" Height="26" HorizontalAlignment="Left" Margin="6,0,0,0" Name="label6" VerticalAlignment="Top" Width="111" />
+            <DatePicker x:Name="mainDateEnd" Grid.Column="1" Grid.ColumnSpan="2" SelectedDate="{x:Static sys:DateTime.Now}" Height="24" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="6,26,0,0"  VerticalAlignment="Top" VerticalContentAlignment="Stretch" Width="180" />
+            <Button Content="Pokaż" Grid.Column="2" Height="23" HorizontalAlignment="Left" Margin="7,27,0,0" x:Name="mainDateRange" VerticalAlignment="Top" Width="75" Click="mainDateRange_Click" />
+        </Grid>
+        <Grid Grid.Row="4">
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBills" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="listViewBills_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
