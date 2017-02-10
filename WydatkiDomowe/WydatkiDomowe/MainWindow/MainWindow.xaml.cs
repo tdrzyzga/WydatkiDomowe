@@ -304,7 +304,8 @@ namespace WydatkiDomowe
 
         private void yearlyRaport_Click(object sender, RoutedEventArgs e)
         {
-
+            YearlyRaportWindow newYearlyRaport = new YearlyRaportWindow(dateBase);
+            newYearlyRaport.Show();
         }
     }
 }

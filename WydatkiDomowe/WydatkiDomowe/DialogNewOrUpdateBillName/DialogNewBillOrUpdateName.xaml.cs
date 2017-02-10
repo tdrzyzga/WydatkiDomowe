@@ -21,7 +21,7 @@ namespace WydatkiDomowe
     public partial class DialogNewOrUpdateBillName : Window
     {
         public bool Result { get; private set; }
-        private BillsBaseDataContext homeBase;
+        private BillsBaseDataContext dateBase;
         private CollectionToView<BillName> collectionListView;        
         private string name;
         private DateTime firstPaymentDate;
@@ -36,7 +36,7 @@ namespace WydatkiDomowe
 
             InitializeComponent();
 
-            homeBase = db;
+            dateBase = db;
             collectionListView = new CollectionToView<BillName>(db);
 
             loadDateToWindow();
@@ -63,12 +63,12 @@ namespace WydatkiDomowe
 
         private void updateBillNameItem()
         {
-            BillName updateBillName = homeBase.BillNames.Single(i => i.BillNameID == updatedBillNameID);
+            BillName updateBillName = dateBase.BillNames.Single(i => i.BillNameID == updatedBillNameID);
             updateBillName.Name = name;
             updateBillName.FirstPaymentDate = firstPaymentDate;
             updateBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
 
-            homeBase.SubmitChanges();
+            dateBase.SubmitChanges();
         }
 
         private void addBillNameItem()
@@ -78,8 +78,8 @@ namespace WydatkiDomowe
             newBillName.FirstPaymentDate = firstPaymentDate;
             newBillName.PaymentsFrequency = Int32.Parse(paymentsFrequency);
 
-            homeBase.BillNames.InsertOnSubmit(newBillName);
-            homeBase.SubmitChanges();
+            dateBase.BillNames.InsertOnSubmit(newBillName);
+            dateBase.SubmitChanges();
         }
 
         private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
@@ -158,7 +158,7 @@ namespace WydatkiDomowe
             dialogBillNameFirstPaymentDate.SelectedDate = billName.FirstPaymentDate.Date;
 
             update = true;
-            updatedBillNameID = homeBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
+            updatedBillNameID = dateBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
         }
 
     }

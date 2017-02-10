@@ -1,0 +1,35 @@
+﻿<Window x:Class="WydatkiDomowe.YearlyRaportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="YearlyRaportWindow"  MinWidth="990" MinHeight="450" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="450" Width="990" Padding="0,0,0,0" WindowStartupLocation="CenterScreen" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}">
+    <Grid Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="168*" />
+        </Grid.RowDefinitions>        
+        <Grid Grid.Row="0" x:Name="raportCheckBoxGrid"></Grid>
+
+        <Grid Grid.Row="1">
+            <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewYearlyRaport" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Rok" Width="100" DisplayMemberBinding="{Binding Year}" />
+                        <GridViewColumn Header="Styczeń" DisplayMemberBinding="{Binding Path=January, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Luty" DisplayMemberBinding="{Binding Path=February, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Marzec" DisplayMemberBinding="{Binding Path=March, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Kwiecień" DisplayMemberBinding="{Binding Path=April, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Maj" DisplayMemberBinding="{Binding Path=May, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Czerwiec" DisplayMemberBinding="{Binding Path=June, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Lipiec" DisplayMemberBinding="{Binding Path=July, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Sierpień" DisplayMemberBinding="{Binding Path=August, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Wrzesień" DisplayMemberBinding="{Binding Path=September, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Październik" DisplayMemberBinding="{Binding Path=October, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Listopan" DisplayMemberBinding="{Binding Path=November, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Grudzień" DisplayMemberBinding="{Binding Path=December, StringFormat=\{0:c\}}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>

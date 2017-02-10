@@ -82,6 +82,9 @@
     <Compile Include="CollectionMainView\CollectionMainView.cs" />
     <Compile Include="MainWindow\CorrectBill.cs" />
     <Compile Include="StringUppercaseFirst\StringUppercaseFirst.cs" />
+    <Compile Include="YearlyRaportWindow\YearlyRaportWindow.xaml.cs">
+      <DependentUpon>YearlyRaportWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="DialogNewOrUpdateBillName\DialogNewBillOrUpdateName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +115,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="YearlyRaportWindow\YearlyRaportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NewOrUpdateBill\NewOrUpdateBill.cs" />
