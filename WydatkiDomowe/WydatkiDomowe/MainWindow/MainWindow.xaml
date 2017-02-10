@@ -5,17 +5,20 @@
                 Title="Wydatki Domowe" MinWidth="990" MinHeight="450" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="450" Width="990" Padding="0,0,0,0" WindowStartupLocation="CenterScreen" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}" Closing="windows_Closing">
     <Grid Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="53" />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="53" />
             <RowDefinition Height="168*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Menu HorizontalAlignment="Stretch" Name="menuAdd" VerticalAlignment="Stretch" Background="GhostWhite">
-                <MenuItem Header="Otwórz">
+            <Menu HorizontalAlignment="Stretch" Name="menuAdd" VerticalAlignment="Stretch" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}">
+                <MenuItem Header="Otwórz" Padding="6,5,6,6" Opacity="1">
                     <MenuItem Header="Odbiorcy" ToolTip="Dodaj lub edytuj odbiorcę" Click="newRecipient_Click" />
                     <MenuItem Header="Rachunki" ToolTip="Dodaj lub edytuj rachunek" Click="newBillName_Click" />
+                </MenuItem>
+                <MenuItem Header="Raporty" Padding="6,5,6,6" Opacity="1" Click="yearlyRaport_Click">
+                    <MenuItem Header="Roczny" ToolTip="Otwórz raport roczny"/> 
                 </MenuItem>
             </Menu>
         </Grid>

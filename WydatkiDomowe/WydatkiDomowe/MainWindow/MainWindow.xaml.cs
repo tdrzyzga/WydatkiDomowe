@@ -301,5 +301,10 @@ namespace WydatkiDomowe
         {
             clearView();
         }
+
+        private void yearlyRaport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

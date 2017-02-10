@@ -84,7 +84,7 @@ namespace WydatkiDomowe
 
         private void dialogRecipientCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            clearView();
         }
 
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HouseholdExpenses" Class="BillsBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=&quot;C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\HouseholdExpenses.mdf&quot;;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="WydatkiDomowe.Properties.Settings" SettingsPropertyName="HouseholdExpensesConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="Expenses.RecipientView" Member="RecipientViews">
     <Type Name="RecipientView">
       <Column Name="Name" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
@@ -74,6 +74,23 @@
       <Column Name="FirstPaymentDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="PaymentsFrequency" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="BillName_Bills" Member="Bills" ThisKey="BillNameID" OtherKey="BillNameID" Type="Bills" />
+    </Type>
+  </Table>
+  <Table Name="Expenses.YearlyRaport" Member="YearlyRaports">
+    <Type Name="YearlyRaport">
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="January" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="February" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="March" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="April" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="May" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="June" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="July" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="August" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="September" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="October" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="November" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="December" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
