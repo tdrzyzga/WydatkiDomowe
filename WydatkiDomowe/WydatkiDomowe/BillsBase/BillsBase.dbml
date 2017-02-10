@@ -76,8 +76,8 @@
       <Association Name="BillName_Bills" Member="Bills" ThisKey="BillNameID" OtherKey="BillNameID" Type="Bills" />
     </Type>
   </Table>
-  <Table Name="Expenses.YearlyRaport" Member="YearlyRaports">
-    <Type Name="YearlyRaport">
+  <Table Name="Expenses.YearlyRaportView" Member="YearlyRaportViews">
+    <Type Name="YearlyRaportView">
       <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="January" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="February" Type="System.Decimal" DbType="Money" CanBeNull="true" />

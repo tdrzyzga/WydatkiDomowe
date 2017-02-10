@@ -18,14 +18,15 @@ namespace WydatkiDomowe
     /// </summary>
     public partial class YearlyRaportWindow : Window
     {
-        private CollectionToView<YearlyRaport> collectionYearlyRaport;
+        private CollectionToView<YearlyRaportView> collectionYearlyRaport;
         private BillsBaseDataContext dateBase;
 
         public YearlyRaportWindow(BillsBaseDataContext db)
         {
             dateBase = db;
             InitializeComponent();
-            collectionYearlyRaport = new CollectionToView<YearlyRaport>(db);
+            collectionYearlyRaport = new CollectionToView<YearlyRaportView>(db);
+            listViewYearlyRaport.ItemsSource = collectionYearlyRaport.Collection;
             loadDateToWindow();
         }
 

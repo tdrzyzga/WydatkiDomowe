@@ -144,11 +144,11 @@ namespace WydatkiDomowe
 			}
 		}
 		
-		public System.Data.Linq.Table<YearlyRaport> YearlyRaports
+		public System.Data.Linq.Table<YearlyRaportView> YearlyRaportViews
 		{
 			get
 			{
-				return this.GetTable<YearlyRaport>();
+				return this.GetTable<YearlyRaportView>();
 			}
 		}
 	}
@@ -1494,8 +1494,8 @@ namespace WydatkiDomowe
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.YearlyRaport")]
-	public partial class YearlyRaport
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Expenses.YearlyRaportView")]
+	public partial class YearlyRaportView
 	{
 		
 		private System.Nullable<int> _Year;
@@ -1524,7 +1524,7 @@ namespace WydatkiDomowe
 		
 		private System.Nullable<decimal> _December;
 		
-		public YearlyRaport()
+		public YearlyRaportView()
 		{
 		}
 		
