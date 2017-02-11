@@ -168,16 +168,9 @@ namespace WydatkiDomowe
 
         private void nameColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            sortByColumn("Name");
-        }
-        
-        private void firstPaymentDateColumnHeader_Click(object sender, RoutedEventArgs e)
-        {
-            sortByColumn("FirstPaymentDate");
-        }
- 
-        private void sortByColumn(string column)
-        {
+            GridViewColumnHeader column = e.Source as GridViewColumnHeader;
+
+            string columnName = column.Tag.ToString();
             ListSortDirection sortDirection = new ListSortDirection();
 
             if (collectionBillNames.Collection.SortDescriptions.Any(i => i.Direction == ListSortDirection.Ascending))
@@ -186,9 +179,8 @@ namespace WydatkiDomowe
                 sortDirection = ListSortDirection.Ascending;
 
             collectionBillNames.Collection.SortDescriptions.Clear();
-            collectionBillNames.Collection.SortDescriptions.Add(new SortDescription(column, sortDirection));
+            collectionBillNames.Collection.SortDescriptions.Add(new SortDescription(columnName, sortDirection));
             collectionBillNames.Collection.Refresh();
-        }
-
+        }     
     }
 }
