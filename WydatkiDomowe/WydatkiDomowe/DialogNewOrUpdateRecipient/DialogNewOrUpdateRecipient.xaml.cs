@@ -180,17 +180,20 @@ namespace WydatkiDomowe
             RecipientView recipientView = new RecipientView();
             ListView listView = sender as ListView;
 
-            recipientView = listView.SelectedItems[0] as RecipientView;
+            if (listView.SelectedItems.Count == 1)
+            {
+                recipientView = listView.SelectedItems[0] as RecipientView;
 
-            dialogRecipientName.Text = recipientView.Name;
-            dialogRecipientAccount.Text = recipientView.Account;
-            dialogRecipientStreet.Text = recipientView.Street;
-            dialogRecipientBuildingNr.Text =recipientView.BuildingNR;
-            dialogRecipientPostCode.Text = recipientView.PostCode;
-            dialogRecipientCity.Text = recipientView.City;
+                dialogRecipientName.Text = recipientView.Name;
+                dialogRecipientAccount.Text = recipientView.Account;
+                dialogRecipientStreet.Text = recipientView.Street;
+                dialogRecipientBuildingNr.Text = recipientView.BuildingNR;
+                dialogRecipientPostCode.Text = recipientView.PostCode;
+                dialogRecipientCity.Text = recipientView.City;
 
-            update = true;
-            updatedRecipientID = dateBase.Recipients.Single(i => i.Name == recipientView.Name).RecipientID;
+                update = true;
+                updatedRecipientID = dateBase.Recipients.Single(i => i.Name == recipientView.Name).RecipientID;
+            }
         }
     }
 }

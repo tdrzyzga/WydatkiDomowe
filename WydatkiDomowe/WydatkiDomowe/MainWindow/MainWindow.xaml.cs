@@ -245,18 +245,21 @@ namespace WydatkiDomowe
             MainView mainView = new MainView();
             ListView listView = sender as ListView;
 
-            mainView = listView.SelectedItems[0] as MainView;
+            if (listView.SelectedItems.Count == 1)
+            {
+                mainView = listView.SelectedItems[0] as MainView;
 
-            mainBillName.Text = mainView.Bill;
-            mainRecipient.Text = mainView.Recipient;
-            mainAmount.Text = mainView.Amount.ToString("F");
-            mainPaymentDate.SelectedDate = mainView.PaymentDate.Date;
-            mainRequiredDate.SelectedDate = mainView.RequiredDate.Date;
+                mainBillName.Text = mainView.Bill;
+                mainRecipient.Text = mainView.Recipient;
+                mainAmount.Text = mainView.Amount.ToString("F");
+                mainPaymentDate.SelectedDate = mainView.PaymentDate.Date;
+                mainRequiredDate.SelectedDate = mainView.RequiredDate.Date;
 
-            update = true;
+                update = true;
 
-            int id = dateBase.BillNames.Single(i => i.Name == mainView.Bill).BillNameID;
-            updatedBillID = dateBase.Bills.Single(i => (i.BillNameID == id && i.PaymentDate == mainView.PaymentDate)).BillsID;
+                int id = dateBase.BillNames.Single(i => i.Name == mainView.Bill).BillNameID;
+                updatedBillID = dateBase.Bills.Single(i => (i.BillNameID == id && i.PaymentDate == mainView.PaymentDate)).BillsID;
+            }
         }
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)

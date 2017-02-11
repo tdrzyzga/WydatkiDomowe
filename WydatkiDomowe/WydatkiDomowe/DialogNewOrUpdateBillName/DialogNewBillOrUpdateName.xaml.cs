@@ -151,14 +151,17 @@ namespace WydatkiDomowe
             BillName billName = new BillName();
             ListView listView = sender as ListView;
 
-            billName = listView.SelectedItems[0] as BillName;
+            if (listView.SelectedItems.Count == 1)
+            {
+                billName = listView.SelectedItems[0] as BillName;
 
-            dialogBillName.Text = billName.Name;
-            dialogBillNamePaymentsFrequency.Text = billName.PaymentsFrequency.ToString();
-            dialogBillNameFirstPaymentDate.SelectedDate = billName.FirstPaymentDate.Date;
+                dialogBillName.Text = billName.Name;
+                dialogBillNamePaymentsFrequency.Text = billName.PaymentsFrequency.ToString();
+                dialogBillNameFirstPaymentDate.SelectedDate = billName.FirstPaymentDate.Date;
 
-            update = true;
-            updatedBillNameID = dateBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
+                update = true;
+                updatedBillNameID = dateBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
+            }
         }
 
     }
