@@ -51,8 +51,17 @@
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBillName" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="listViewBillName_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nazwa" Width="50" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Termin zapłaty do" Width="150" DisplayMemberBinding="{Binding Path=FirstPaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}" />
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Name" Click="nameColumnHeader_Click">Name</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=FirstPaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Termin zapłaty do" Click="firstPaymentDateColumnHeader_Click">Termin zapłaty do</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
                         <GridViewColumn Header="Częstotliwość wpłat (dni)" Width="150" DisplayMemberBinding="{Binding PaymentsFrequency}" />
                     </GridView>
                 </ListView.View>

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.ComponentModel;
 
 namespace WydatkiDomowe
 {
@@ -22,7 +23,7 @@ namespace WydatkiDomowe
     {
         public bool Result { get; private set; }
         private BillsBaseDataContext dateBase;
-        private CollectionToView<BillName> collectionListView;        
+        private CollectionToView<BillName> collectionBillNames;        
         private string name;
         private DateTime firstPaymentDate;
         private string paymentsFrequency;
@@ -37,7 +38,7 @@ namespace WydatkiDomowe
             InitializeComponent();
 
             dateBase = db;
-            collectionListView = new CollectionToView<BillName>(db);
+            collectionBillNames = new CollectionToView<BillName>(db);
 
             loadDateToWindow();
             update = false;
@@ -96,8 +97,9 @@ namespace WydatkiDomowe
 
         private void loadListView()
         {
-            collectionListView.LoadCollection();
-            listViewBillName.ItemsSource = collectionListView.Collection;
+            collectionBillNames.LoadCollection();
+            collectionBillNames.Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            listViewBillName.ItemsSource = collectionBillNames.Collection;
         }
         
         private void refreshView()
@@ -108,7 +110,7 @@ namespace WydatkiDomowe
         
         private void refreshListView()
         {
-            collectionListView.RefreshCollection();
+            collectionBillNames.RefreshCollection();
         }
 
         private void clearView()
@@ -162,6 +164,30 @@ namespace WydatkiDomowe
                 update = true;
                 updatedBillNameID = dateBase.BillNames.Single(i => i.Name == billName.Name).BillNameID;
             }
+        }
+
+        private void nameColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            sortByColumn("Name");
+        }
+        
+        private void firstPaymentDateColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            sortByColumn("FirstPaymentDate");
+        }
+ 
+        private void sortByColumn(string column)
+        {
+            ListSortDirection sortDirection = new ListSortDirection();
+
+            if (collectionBillNames.Collection.SortDescriptions.Any(i => i.Direction == ListSortDirection.Ascending))
+                sortDirection = ListSortDirection.Descending;
+            else
+                sortDirection = ListSortDirection.Ascending;
+
+            collectionBillNames.Collection.SortDescriptions.Clear();
+            collectionBillNames.Collection.SortDescriptions.Add(new SortDescription(column, sortDirection));
+            collectionBillNames.Collection.Refresh();
         }
 
     }

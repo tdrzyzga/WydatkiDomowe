@@ -23,7 +23,7 @@ namespace WydatkiDomowe
     {
         public bool Result { get; private set; }
 
-        private CollectionToView<RecipientView> collectionListView;
+        private CollectionToView<RecipientView> collectionRecipients;
         private CollectionToView<Street> collectionStreet;
         private CollectionToView<PostCode> collectionPostCode;
         private CollectionToView<City> collectionCity;
@@ -52,7 +52,7 @@ namespace WydatkiDomowe
 
         private void initializeCollection(BillsBaseDataContext db)
         {
-            collectionListView = new CollectionToView<RecipientView>(db);
+            collectionRecipients = new CollectionToView<RecipientView>(db);
             collectionStreet = new CollectionToView<Street>(db);
             collectionPostCode = new CollectionToView<PostCode>(db);
             collectionCity = new CollectionToView<City>(db);
@@ -104,8 +104,9 @@ namespace WydatkiDomowe
 
         private void loadListView()
         {
-            collectionListView.LoadCollection();
-            listViewRecipient.ItemsSource = collectionListView.Collection;
+            collectionRecipients.LoadCollection();
+            collectionRecipients.Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            listViewRecipient.ItemsSource = collectionRecipients.Collection;
         }
 
         private void refreshView()
@@ -127,7 +128,7 @@ namespace WydatkiDomowe
 
         private void refreshListView()
         {
-            collectionListView.RefreshCollection();
+            collectionRecipients.RefreshCollection();
         }
 
         private void refreshComboboxes()

@@ -24,7 +24,7 @@ namespace WydatkiDomowe
             collection = new ObservableCollection<T>();
             Collection = new CollectionView(collection);
             Collection = (CollectionView)CollectionViewSource.GetDefaultView(collection);
-            Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            //Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
         }
 
         public void LoadCollection()
