@@ -56,7 +56,6 @@
                                 <GridViewColumnHeader Tag="Name" Click="nameColumnHeader_Click">Name</GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
-
                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=FirstPaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Tag="FirstPaymentDate" Click="nameColumnHeader_Click">Termin zapłaty do</GridViewColumnHeader>
