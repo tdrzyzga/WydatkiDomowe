@@ -13,6 +13,6 @@ Aplikacja umożliwia:
 - tworzenie raportów za wybrany okres
 
 # 3) Inne
-Aplikacja w trakcie tworzenia.... Jej głownym celem jest nauka języka SQL, LINQ to SQL oraz rozwijanie umiejętności programistycznych.
+Aplikacja w trakcie tworzenia.... Jej głownym celem jest nauka języka SQL, LINQ to SQL oraz rozwijanie umiejętności programistycznych.  
 
 
