@@ -136,6 +136,8 @@ namespace WydatkiDomowe
 
         private void createCheckBoxes()
         {
+            if (innerStack != null)
+                mainCheckBoxGrid.Children.Clear();
             innerStack = new StackPanel { Orientation = Orientation.Horizontal };
             innerStack.HorizontalAlignment = HorizontalAlignment.Stretch;
             innerStack.VerticalAlignment = VerticalAlignment.Stretch;
@@ -208,21 +210,28 @@ namespace WydatkiDomowe
         private void mainBillName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (mainBillName.IsDropDownOpen)
-                setRequiredDate();
+                setPaymentAndRequiredDate();
         }
 
-        private void setRequiredDate()
+        private void setPaymentAndRequiredDate()
         {
             BillName item = new BillName();
             item = dateBase.BillNames.Single(i => i.BillNameID == (int)mainBillName.SelectedValue);
+            DateTime tempDate;
 
             if (existInBillTable(item))
             {
                 var items = dateBase.Bills.Where(n => n.BillNameID == item.BillNameID).OrderBy(n => n.RequiredDate);
-                mainRequiredDate.SelectedDate = setDate(item, items.AsEnumerable().Last().RequiredDate);
+                tempDate = setDate(item, items.AsEnumerable().Last().RequiredDate);
+                mainRequiredDate.SelectedDate = tempDate;
+                mainPaymentDate.SelectedDate = tempDate;
             }
             else
-                mainRequiredDate.SelectedDate = setDate(item);
+            {
+                tempDate = setDate(item);
+                mainRequiredDate.SelectedDate = tempDate;
+                mainPaymentDate.SelectedDate = tempDate;
+            }
         }
 
         private bool existInBillTable(BillName item)
@@ -292,6 +301,7 @@ namespace WydatkiDomowe
                 i.IsChecked = true;
 
             checkBoxAll.IsChecked = true;
+            collectionBills.SetDefaultSortDescription();
         }
 
         private void mainDateRange_Click(object sender, RoutedEventArgs e)
@@ -309,6 +319,21 @@ namespace WydatkiDomowe
         {
             YearlyRaportWindow newYearlyRaport = new YearlyRaportWindow(dateBase);
             newYearlyRaport.Show();
+        }
+        
+        private void nameColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.Source as GridViewColumnHeader;
+
+            string columnName = column.Tag.ToString();
+            ListSortDirection sortDirection = new ListSortDirection();
+
+            if (collectionBills.IsAscending())
+                sortDirection = ListSortDirection.Descending;
+            else
+                sortDirection = ListSortDirection.Ascending;
+
+            collectionBills.SetNewSortDescritpion(new SortDescription(columnName, sortDirection));
         }
     }
 }

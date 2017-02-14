@@ -61,7 +61,11 @@
                                 <GridViewColumnHeader Tag="FirstPaymentDate" Click="nameColumnHeader_Click">Termin zapłaty do</GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Header="Częstotliwość wpłat (dni)" Width="150" DisplayMemberBinding="{Binding PaymentsFrequency}" />
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding PaymentsFrequency}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="PaymentsFrequency" Click="nameColumnHeader_Click">Częstotliwość wpłat (dni)</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

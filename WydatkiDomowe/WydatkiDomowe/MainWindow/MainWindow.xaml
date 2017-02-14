@@ -96,11 +96,31 @@
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewBills" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="listViewBills_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Rachunek" Width="150" DisplayMemberBinding="{Binding Bill}" />
-                        <GridViewColumn Header="Odbiorca" Width="150" DisplayMemberBinding="{Binding Recipient}" />
-                        <GridViewColumn Header="Kwota" Width="150" DisplayMemberBinding="{Binding Path=Amount, StringFormat=\{0:c\}}" />
-                        <GridViewColumn Header="Data wpłaty" Width="150" DisplayMemberBinding="{Binding Path=PaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}" />
-                        <GridViewColumn Header="Termin zapłaty" Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat= \{0:dd\-MM\-yyyy\}}" />
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Bill}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Bill" Click="nameColumnHeader_Click">Rachunek</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Recipient}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Recipient" Click="nameColumnHeader_Click">Odbiorca</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Amount, StringFormat=\{0:c\}}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Amount" Click="nameColumnHeader_Click">Kwota</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=PaymentDate, StringFormat= \{0:dd\-MM\-yyyy\}}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="PaymentDate" Click="nameColumnHeader_Click">Data wpłaty</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=RequiredDate, StringFormat= \{0:dd\-MM\-yyyy\}}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="RequiredDate" Click="nameColumnHeader_Click">Termin zapłaty</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -196,5 +196,20 @@ namespace WydatkiDomowe
                 updatedRecipientID = dateBase.Recipients.Single(i => i.Name == recipientView.Name).RecipientID;
             }
         }
+
+        private void nameColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.Source as GridViewColumnHeader;
+
+            string columnName = column.Tag.ToString();
+            ListSortDirection sortDirection = new ListSortDirection();
+
+            if (collectionRecipients.IsAscending())
+                sortDirection = ListSortDirection.Descending;
+            else
+                sortDirection = ListSortDirection.Ascending;
+
+            collectionRecipients.SetNewSortDescritpion(new SortDescription(columnName, sortDirection));
+        }
     }
 }

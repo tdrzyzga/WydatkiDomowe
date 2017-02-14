@@ -24,7 +24,7 @@ namespace WydatkiDomowe
             collection = new ObservableCollection<T>();
             Collection = new CollectionView(collection);
             Collection = (CollectionView)CollectionViewSource.GetDefaultView(collection);
-            //Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            Collection.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
         }
 
         public void LoadCollection()
@@ -40,6 +40,18 @@ namespace WydatkiDomowe
             foreach (var i in dateBase.GetTable<T>())
                 collection.Add(i);
             Collection.Refresh();
+        }
+        
+        public void SetNewSortDescritpion(SortDescription sortDescription)
+        {
+            Collection.SortDescriptions.Clear();
+            Collection.SortDescriptions.Add(sortDescription);
+            Collection.Refresh();
+        }
+
+        public bool IsAscending()
+        {
+            return Collection.SortDescriptions.Any(i => i.Direction == ListSortDirection.Ascending);
         }
     }
 }

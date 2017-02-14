@@ -173,14 +173,12 @@ namespace WydatkiDomowe
             string columnName = column.Tag.ToString();
             ListSortDirection sortDirection = new ListSortDirection();
 
-            if (collectionBillNames.Collection.SortDescriptions.Any(i => i.Direction == ListSortDirection.Ascending))
+            if (collectionBillNames.IsAscending())
                 sortDirection = ListSortDirection.Descending;
             else
                 sortDirection = ListSortDirection.Ascending;
 
-            collectionBillNames.Collection.SortDescriptions.Clear();
-            collectionBillNames.Collection.SortDescriptions.Add(new SortDescription(columnName, sortDirection));
-            collectionBillNames.Collection.Refresh();
+            collectionBillNames.SetNewSortDescritpion(new SortDescription(columnName, sortDirection));
         }     
     }
 }

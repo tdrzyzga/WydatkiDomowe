@@ -63,6 +63,26 @@ namespace WydatkiDomowe
             Collection.Refresh();
         }
 
+        public void SetDefaultSortDescription()
+        {
+            Collection.SortDescriptions.Clear();
+            Collection.SortDescriptions.Add(new SortDescription("PaymentDate", ListSortDirection.Descending));
+            Collection.SortDescriptions.Add(new SortDescription("Bill", ListSortDirection.Ascending));
+            Collection.Refresh();
+        }
+        
+        public void SetNewSortDescritpion(SortDescription sortDescription)
+        {
+            Collection.SortDescriptions.Clear();
+            Collection.SortDescriptions.Add(sortDescription);
+            Collection.Refresh();
+        }
+        
+        public bool IsAscending()
+        {
+            return Collection.SortDescriptions.Any(i => i.Direction == ListSortDirection.Ascending);
+        }
+
         private bool filterByDateRange(object item)
         {
             MainView bill = item as MainView;
@@ -76,6 +96,7 @@ namespace WydatkiDomowe
                 return false;
             else
                 return true;
-        }        
+        }
+
     }    
 }

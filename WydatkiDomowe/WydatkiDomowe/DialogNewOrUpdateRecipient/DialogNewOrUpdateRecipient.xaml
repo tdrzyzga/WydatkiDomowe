@@ -105,12 +105,36 @@
             <ListView Grid.Row="2" HorizontalAlignment="Stretch" x:Name="listViewRecipient" VerticalAlignment="Stretch" Margin="5,5,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="listViewRecipient_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nazwa" Width="50" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Konto bankowe" Width="150" DisplayMemberBinding="{Binding Account}"/>
-                        <GridViewColumn Header="Ulica" Width="50" DisplayMemberBinding="{Binding Street}"/>
-                        <GridViewColumn Header="Nr" Width="30" DisplayMemberBinding="{Binding BuildingNR}"/>
-                        <GridViewColumn Header="Kod pocztowy" Width="100" DisplayMemberBinding="{Binding PostCode}"/>
-                        <GridViewColumn Header="Miasto" Width="100" DisplayMemberBinding="{Binding City}"/>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Name" Click="nameColumnHeader_Click">Nazwa</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Account}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Account" Click="nameColumnHeader_Click">Konto bankowe</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Street}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Street" Click="nameColumnHeader_Click">Ulica</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="30" DisplayMemberBinding="{Binding BuildingNR}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="BuildingNR" Click="nameColumnHeader_Click">Nr</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding PostCode}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="PostCode" Click="nameColumnHeader_Click">Kod pocztowy</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding City}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="City" Click="nameColumnHeader_Click">Miasto</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
