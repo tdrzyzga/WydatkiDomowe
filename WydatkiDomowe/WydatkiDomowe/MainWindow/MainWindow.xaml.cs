@@ -306,8 +306,7 @@ namespace WydatkiDomowe
 
         private void mainDateRange_Click(object sender, RoutedEventArgs e)
         {
-            collectionBills.Search((DateTime)mainDateStart.SelectedDate, (DateTime)mainDateEnd.SelectedDate);
-            
+            collectionBills.Search((DateTime)mainDateStart.SelectedDate, (DateTime)mainDateEnd.SelectedDate);            
         }
 
         private void mainCancel_Click(object sender, RoutedEventArgs e)

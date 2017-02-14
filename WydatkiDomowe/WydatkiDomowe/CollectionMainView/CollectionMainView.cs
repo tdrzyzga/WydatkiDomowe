@@ -87,16 +87,18 @@ namespace WydatkiDomowe
         {
             MainView bill = item as MainView;
 
-            return isInDateRange(bill.PaymentDate);
+            if (dateStart == DateTime.MinValue || dateEnd == DateTime.MinValue)
+                return true;
+            else
+                return isInDateRange(bill.PaymentDate);
         }
 
         private bool isInDateRange(DateTime date)
         {
-            if (date <= dateStart && date >= dateEnd)
-                return false;
-            else
+            if (date >= dateStart && date <= dateEnd)
                 return true;
+            else
+                return false;
         }
-
     }    
 }

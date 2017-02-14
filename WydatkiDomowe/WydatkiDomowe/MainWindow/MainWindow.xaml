@@ -17,8 +17,9 @@
                     <MenuItem Header="Odbiorcy" ToolTip="Dodaj lub edytuj odbiorcę" Click="newRecipient_Click" />
                     <MenuItem Header="Rachunki" ToolTip="Dodaj lub edytuj rachunek" Click="newBillName_Click" />
                 </MenuItem>
-                <MenuItem Header="Raporty" Padding="6,5,6,6" Opacity="1" Click="yearlyRaport_Click">
-                    <MenuItem Header="Roczny" ToolTip="Otwórz raport roczny"/> 
+                <MenuItem Header="Raporty" Padding="6,5,6,6" Opacity="1" >
+                    <MenuItem Header="Roczny" ToolTip="Opłaty za poszczególne rachunki" Click="yearlyRaport_Click"/>
+                    <MenuItem Header="Miesięczny" ToolTip="Opłaty w poszczególnych miesiącach"/>                    
                 </MenuItem>
             </Menu>
         </Grid>
